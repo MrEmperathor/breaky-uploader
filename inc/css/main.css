@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300');
+/* .navbar {
+    position: relative;
+} */
+body{
+    background-color: #0c2461;
+    /* font-family: Metropolis,sans-serif; */
+}
+h1,h2,h3,h4,h5{
+    color: #fff;
+    font-weight: 400;
+}
+.nav a{
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 20px 15px;
+    color: #fff;
+    padding-left: 25px;
+    padding-right: 22px;
+}
+.card-position{
+    margin: 0%;
+    padding: 10px;
+}
+.counter {
+    position: relative;
+    top: -39px;
+    left: 0px;
+    z-index: 2;
+    padding: 1px 7px;
+    margin-left: -23px;
+    font-size: 11px;
+    color: #fff;
+    background-color: #eb2f06;
+    border-radius: 10em;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+.textColor{
+    color: #c8d6e5 !important;
+}
+.t-area{
+    border-radius: 10px !important;
+    padding: 2% !important;
+    background-color: #0a3d62 !important;
+}
+.redon-t{
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    border-bottom-left-radius: 100px;
+    border-top-left-radius: 100px;
+}
+.redon-t-acortador{
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-top-left-radius: 50px;
+}
+.redon-e-t{
+    color: #fff;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    /* border-bottom-left-radius: 100px;
+    border-top-left-radius: 100px; */
+}
+.navbar-brand {
+    transform: translateX(0%);
+    left: 50%;
+    position: absolute;
+  }
+  .purp-t{
+      background: #b71540 !important;
+  }
+  /* .main-header{
+    height: 100vh;
+    background: url('https://image.tmdb.org/t/p/original/f5F4cRhQdUbyVbB5lTNCwUzD6BP.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  } */
+  .gris{
+    background: #10ac8500 !important;
+}
+.naranja-t{
+    background: #eb2f06 !important;
+}
+.black-t{
+    background: #0a3d62 !important;
+}
+.azul-t{
+    background: #0c2461 !important;
+}
+.azul1-t{
+    background: #0a3d62;
+}
+.btn-outline-secondary{
+    color: #eb2f06!important;
+    background-color: transparent!important;
+    border: 2px solid #eb2f06!important;
+}
+.poster{
+    width: 60%;
+    /* margin-top: 17%;
+    margin-left: -34%; */
+  }
+.bajar{
+    padding: 11%;
+    /* float: left;
+    padding-bottom: 29%; */
+  }
+.card-body{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.links{
+    padding: 2%;
+    float: left;
+    margin-left: -14%;
+}
+.post{
+    /* float: left; */
+}
+.card, .navbar, .pagination .page-item.active .page-link {
+    box-shadow: none !important;
+}
+.backdrop>.Image {
+    z-index: -1;
+}
+.backdrop>.Image img {
+    opacity: .5;
+}
+
+.Image img, .backdrop>.Image, .backdrop>.Image img {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 15%;
+    top: 0;
+}
+.Image:after, .backdrop>.Image:after {
+    background: linear-gradient(to bottom, rgba(2,36,97,0) 0%,rgba(2,36,97,1) 100%);
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    pointer-events: none;
+}
+.backdrop>.Image img {
+    opacity: .5;
+}
+#peli720{
+    border:1px solid;
+    height:400px;
+    width:999px;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* EFECTO HOVER ENLACES */
+.primero,.segundo,#tercero_oc { 
+    display:none; 
+    padding:5px; 
+    /* border:1px solid #ccc;  */
+    /* background-color:#f1f1f1;  */
+    position:relative; 
+    /* width:200px;  */
+}
+#segundo { 
+    position:absolute; top:100px; 
+}
+/* Al pasar el mouse por encima del div mostramos el div con la clase ".primero". Esta clase, tiene que estar dentro del id "primero" para que pueda funcionar */
+#primero:hover .primero { 
+    display:block; 
+}
+#segundo:hover .segundo { 
+    display:block; 
+}
+li {list-style: none}
+/* .dt-buttons{
+    color: #007bff !important;
+} */
+button.dt-button:hover:not(.disabled){
+    border: 1px solid #00a1fa;
+}
+
+button.dt-button, div.dt-button, a.dt-button {
+
+    border: 1px solid #00a1fa !important;
+    color: #00a1fa !important;
+}

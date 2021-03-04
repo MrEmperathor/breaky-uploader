@@ -1,0 +1,3 @@
+esperando a que terminen todos los procesos #24
+[1]+  Running                 Subuniversal "${MiPeli}" "${SJetload}" $fifoJetload "Jetload" &
+PROCESOS TERMINADOS!!!

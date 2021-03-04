@@ -1,0 +1,20 @@
+Options +FollowSymLinks
+RewriteEngine on
+Options -Indexes
+
+RewriteCond %{REQUEST_FILENAME} !-f
+#En nuestro ejemplo tendríamos la siguiente ruta
+RewriteRule ^embed/([0-9]+)$ embed.php?page=$1
+RewriteRule ^vip/([0-9]+)$ comp/lvip.php?i=$1
+RewriteRule ^free/([0-9]+)$ comp/lfree.php?i=$1
+RewriteRule ^f720/([0-9]+)$ comp/e720.php?i=$1
+RewriteRule ^serie/([0-9]+)$ serie.php?s=$1
+RewriteRule ^series/$ seri.php
+RewriteRule ^peliculas/$ index.php
+#embed.php?page=271
+#comp/lvip.php?i=269
+#comp/lfree.php?i=269
+#comp/e720.php?i=
+#serie.php?s=156
+#seri.php
+#index.php
