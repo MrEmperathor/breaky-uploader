@@ -73,7 +73,22 @@ $name_sin_year = substr($name, 0, -7);
                 <div class="col text-center">
                     <h1><?php echo $result['original_title'];?></h1>
                     <h2><?php echo $result['id']?></h2>
-                    <h6><?php echo $enlaces["hqq.to"]?></h6>
+                    <br>
+                    <dl class="row">
+                        <dt class="col-sm-6"></dt>
+                        <dt class="col-sm-6"></dt>
+                        <dd class="col-sm-6">
+                            <h6><?php echo $enlaces["hqq.to"]?></h6>
+                        </dd>
+                        <dd class="col-sm-6">
+                            <a href=<?php echo $enlaces["fembed.com"]?> target="_blank" rel="noopener noreferrer"><?php echo $enlaces["fembed.com"]; ?></a>
+                        </dd>
+                    </dl>
+                    <div class="col-12 text-center">
+                        <button type="button" class="btn purp-t redon-t" id="estado_fembed" onclick="fembed_estado_720()" value=<?php echo $enlaces["fembed.com"]?> >720P</button>
+                    </div>
+                    <!-- <h6><?php echo $enlaces["fembed.com"]?></h6> -->
+                    
                     <h6><?php echo $result['release_date']?></h6>
                     <p class="card-text text-white" id=codigo1><?php echo $name." ".$calidad." ".$idioma;?></p>
                     <a href="<?php echo "https://cine24h.net/?s=".urlencode($name_sin_year);?>" target="_blank"
@@ -381,35 +396,45 @@ $name_sin_year = substr($name, 0, -7);
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-
+            
             <div class="modal-body" id=codigo0>
                 <?php 
                     if (!empty($enlaces_hover_2)) {
-                        echo 'PARTE TRUE';
-                        echo ($enlaces_hover_2["fembed-embed"] != "") ? $enlaces_hover_2["fembed-embed"].'<br>' : ""; // uptobox embed
-                        echo ($enlaces_hover_2["mystream.to"] != "") ? $enlaces_hover_2["mystream.to"].'<br>' : ""; //jetload
+                        // echo ($enlaces_hover_2["fembed-embed"] != "") ? $enlaces_hover_2["fembed-embed"].'<br>' : ""; // uptobox embed
+                        // echo ($enlaces_hover_2["mystream.to"] != "") ? $enlaces_hover_2["mystream.to"].'<br>' : ""; //jetload
                         echo ($enlaces_hover_2["hqq.to"] != "") ? $enlaces_hover_2["hqq.to"].'<br>' : ""; //netu
-                        echo ($enlaces_hover_2["fembed.com"] != "No hay enlaces") ? $urlRedirect . $enlaces_hover_2["fembed.com"].'<br>' : ""; //
-                        echo ($enlaces_hover_2["short.pe"] != "") ? $enlaces_hover_2["short.pe"].'<br>' : ""; //short
-                        echo ($enlaces_hover_2["ouo.io"] != "") ? $enlaces_hover_2["ouo.io"].'<br>' : ""; //ouo
+                        echo ($enlaces_hover_2["mega.nz"] != "") ? $enlaces_hover_2["mega.nz"].'<br>' : ""; //mega
+                        // echo ($enlaces_hover_2["fembed.com"] != "No hay enlaces") ? $enlaces_hover_2["fembed.com"].'<br>' : ""; //
+                        // echo ($enlaces_hover_2["short.pe"] != "") ? $enlaces_hover_2["short.pe"].'<br>' : ""; //short
+                        // echo ($enlaces_hover_2["ouo.io"] != "") ? $enlaces_hover_2["ouo.io"].'<br>' : ""; //ouo
 
 
                         
                     }else{
                         echo "";
                     }
-                    echo ($enlaces["fembed.com"] != "No hay enlaces") ? $embed_fembed.'<br>' : ""; // uptobox embed
-                    echo ($enlaces["mystream.to"] != "No hay enlaces") ? $enlaces["mystream.to"].'<br>' : ""; //jetload
+                    if ($enlaces["fembed.com"] == "No hay enlaces") {
+                        $enlaces["fembed.com"] = $enlaces_hover_2["fembed.com"];
+                        $embed_fembed = $enlaces_hover_2["fembed-embed"];
+                    }
+                    echo ($enlaces["fembed.com"] != "No hay enlaces") ? $embed_fembed.'<br>' : $enlaces_hover_2["fembed-embed"]; // uptobox embed
+                    // echo ($enlaces["mystream.to"] != "No hay enlaces") ? $enlaces["mystream.to"].'<br>' : ""; //jetload
                     echo ($enlaces["hqq.to"] != "No hay enlaces") ? $enlaces["hqq.to"].'<br>' : ""; //netu
+                    echo ($enlaces["mega.nz"] != "No hay enlaces") ? $enlaces["mega.nz"].'<br>' : ""; //mega 720
+                    echo ($enlaces["fembed.com"] != "No hay enlaces") ? $enlaces["fembed.com"].'<br>' : $enlaces_hover_2["fembed.com"]; // uptobox embed
                     // echo ($enlaces["gounlimited.to"] != "No hay enlaces") ? $urlRedirect . $enlaces["gounlimited.to"].'<br>' : ""; //gounlimited
-                    echo ($enlaces["fembed.com"] != "No hay enlaces") ? $urlRedirect . $enlaces["fembed.com"].'<br>' : ""; //gounlimited
-                    echo ($enlaces["short.pe"] != "No hay enlaces") ? $enlaces["short.pe"].'<br>' : ""; //short
-                    echo ($enlaces["ouo.io"] != "No hay enlaces") ? $enlaces["ouo.io"].'<br>' : ""; //ouo
+                    // echo ($enlaces["fembed.com"] != "No hay enlaces") ? $urlRedirect . $enlaces["fembed.com"].'<br>' : ""; //gounlimited
+                    // echo ($enlaces["short.pe"] != "No hay enlaces") ? $enlaces["short.pe"].'<br>' : ""; //short
+                    // echo ($enlaces["ouo.io"] != "No hay enlaces") ? $enlaces["ouo.io"].'<br>' : ""; //ouo
 
-                    echo '<input type="hidden" id="fembed" name="bklinks[]" value="'.$embed_fembed.'">';
-                    echo '<input type="hidden" id="mystream" name="bklinks[]" value="'.$enlaces["mystream.to"].'">';
+                    // echo '<input type="hidden" id="fembedEmbed" name="bklinks[]" value="'.$enlaces_hover_2["fembed-embed"].'">';
+                    echo '<input type="hidden" id="fembedEmbed" name="bklinks[]" value="'.$embed_fembed.'">';
+                    echo '<input type="hidden" id="fembed" name="bklinks[]" value="'.$enlaces["fembed.com"].'">';
+                    echo '<input type="hidden" id="mega720" name="bklinks[]" value="'.$enlaces_hover_2["mega.nz"].'">';
+                    // echo '<input type="hidden" id="mystream" name="bklinks[]" value="'.$enlaces["mystream.to"].'">';
                     echo '<input type="hidden" id="hqq" name="bklinks[]" value="'.$enlaces["hqq.to"].'">';
-                    echo '<input type="hidden" id="fembedRedirect" name="bklinks[]" value="'.$urlRedirect . $enlaces["fembed.com"].'">';
+                    echo '<input type="hidden" id="mega1080" name="bklinks[]" value="'.$enlaces["mega.nz"].'">';
+                    // echo '<input type="hidden" id="fembedRedirect" name="bklinks[]" value="'.$enlaces["fembed.com"].'">';
                     echo '<input type="hidden" id="short" name="bklinks[]" value="'.$enlaces["short.pe"].'">';
                     echo '<input type="hidden" id="ouo" name="bklinks[]" value="'.$enlaces["ouo.io"].'">';
                     //idioma
@@ -503,6 +528,7 @@ window.buffer = '';
 // Creamos una variable global para nuestro ID de intervalo
 window._$target = document.getElementById('peli720');
 window.arrayK = <?php echo json_encode($opciones_name);?>;
+
 
 
 
@@ -601,8 +627,9 @@ function mandar720() {
 
 
 function accion() {
+
     let nombre = `-n "${document.getElementById('nombre').value}"`;
-    let enlace = `-e "${document.getElementById('enlace').value}"`;
+    let enlace = document.getElementById('enlace').value;
     let subb = document.getElementById('subti').value;
     let tmdb = `-t ${document.getElementById('tmdb').value}`;
     let c10800 = document.getElementById('c1080').checked;
@@ -631,6 +658,20 @@ function accion() {
             console.log("La clave es " + clave + " y el valor es " + window.arrayK[clave]);
         }
     }
+    
+    // url.match(/[-\w]{25,}/)
+    
+    var a = document.createElement('a');
+    a.href = enlace;
+
+    if (a.hostname == "drive.google.com"){
+        id_drive = enlace.match(/[-\w]{25,}/);
+        if(id_drive) enlace = "-e '"+id_drive+"'";
+    }else{
+        enlace = "-e '"+enlace+"'";
+    }
+    
+
 
     if (c10800) var calidad = "-c 1080";
     if (c7200) var calidad = "-c 720";
@@ -639,7 +680,7 @@ function accion() {
     if (isub) var idioma = '-i "SUB"';
 
 
-    var de = dee ? "de2" : "de";
+    var de = dee ? "de3" : "de";
     var sub = subb ? `-s "${subb}"` : "";
     var id_unico = id_unico ? id_unico : '';
     var B_C_1080 = bajar_calidad_1080 ? '-C 1080' : '';
@@ -647,7 +688,7 @@ function accion() {
 
 
     document.getElementById('comandoText').innerHTML = de + ' ' + nombre + ' ' + idioma + ' ' + calidad + ' ' + tmdb +
-        ' ' + enlace + ' ' + sub + B_C_1080 + B_C_720 + opcionUnica + ' ' + id_unico;
+        ' ' + enlace + ' ' + sub + B_C_1080 + B_C_720 + opcionUnica + ' ' + id_unico + '-B true; de2 ' + nombre + ' ' + idioma + ' ' + calidad + ' ' + tmdb + ' ' + sub + B_C_1080 + B_C_720 + opcionUnica + ' ' + id_unico;
     // document.getElementById('comandoText').innerHTML = `de -n ${nombre} -c ${caidad} -i ${idioma} -t ${tmdb} -`
 }
 </script>
@@ -656,6 +697,53 @@ function accion() {
 <script src="js/peticiones.js"></script>
 <script src="js/peli720.js"></script>
 <script src="js/api-breaky.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+
+<script>
+    function fembed_estado_720(){
+        url_fembed = document.getElementById("estado_fembed").value;
+        url_fembed_api = url_fembed.replace("/f/", "/api/source/");
+        const url_api = "http://51.195.148.50/panel2/panel/inc/include/fembed_720.php?u="+url_fembed
+
+        fetch(url_api)
+        .then(function(response) {
+            // document.getElementById('resultadooVery').innerHTML = response.text();
+            return response.text();
+        })
+        .then(data => {
+            // data_json = JSON.parse(data);
+            if (data){
+                alert('CALIDAD 720p LISTA!!');
+                console.log(data);
+                document.getElementById('enlace').value= data;
+            }else{
+                alert("AUN NO ESTA LISTA :(");
+            }
+
+        })
+        .catch(function(err) {
+            console.error(err);
+            document.getElementById('resultadooVery').innerHTML = err;
+            document.querySelector('#cargaEmpezada').style.display = "none";
+
+        });
+    }
+    // $(document).ready(function(){
+    //     $('#estado_fembed').on('click', function(){
+    //         var $this = $(this);
+    //         url_fembed = document.getElementById("estado_fembed").value;
+    //         url_fembed_api = url_fembed.replace("https://fembed.com/f/", "/api/source/");
+    //         $.post(url_fembed_api, function(res){
+    //             if(res.success) {
+    //                 data = res.data;
+    //                 alert(data);
+    //                 console.log(data);
+    //                 // $.getScript(res.player.revenue);
+    //             }
+    //         });
+    //     });
+    // });
+</script>
 </body>
 <?php include_once 'footer.php'; ?>
 

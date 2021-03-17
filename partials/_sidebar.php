@@ -37,8 +37,8 @@
         </a>
         <div class="collapse" id="general-pages">
           <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="/panel/?id=pelis">Peliculas</a></li>
-              <li class="nav-item"> <a class="nav-link" href="/panel/?id=series">Series</a></li>
+              <li class="nav-item"> <a class="nav-link" href="/panel2/panel/?id=pelis">Peliculas</a></li>
+              <li class="nav-item"> <a class="nav-link" href="/panel2/panel/?id=series">Series</a></li>
           </ul>
         </div>
       </li>
@@ -50,7 +50,7 @@
         </a>
         <div class="collapse" id="general-pages-config">
           <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-item"> <a class="nav-link" href="/panel/?id=uptobox_sessid">Uptobox</a></li>
+              <li class="nav-item"> <a class="nav-item"> <a class="nav-link" href="/panel2/panel/?id=uptobox_sessid">Uptobox</a></li>
           </ul>
         </div>
       </li>
@@ -62,8 +62,8 @@
         </a>
         <div class="collapse" id="general-pages-config1">
           <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-item"> <a class="nav-link" href="/panel/?id=sc">Plugin</a></li>
-              <li class="nav-item"> <a class="nav-item"> <a class="nav-link" href="/panel/?id=generar-comando">Comandos</a></li>
+              <li class="nav-item"> <a class="nav-item"> <a class="nav-link" href="/panel2/panel/?id=sc">Plugin</a></li>
+              <li class="nav-item"> <a class="nav-item"> <a class="nav-link" href="/panel2/panel/?id=generar-comando">Comandos</a></li>
           </ul>
         </div>
       </li>

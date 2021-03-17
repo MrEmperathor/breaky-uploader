@@ -31,7 +31,7 @@ include "controlador/app.php";
                  
         include "vista/footer.php";        
     }else{
-        header('location: /panel/login.php');
+        header('location: /panel2/panel/login.php');
       }
     
 

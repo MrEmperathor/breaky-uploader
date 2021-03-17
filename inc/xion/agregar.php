@@ -51,9 +51,11 @@ if($argv){
 
 
 	
-	$sql_editar = 'UPDATE pelis SET links=?, Backup=? WHERE id=?';
+	// $sql_editar = 'UPDATE pelis SET links=?, Backup=? WHERE id=?';
+	$sql_editar = 'UPDATE pelis SET links=? WHERE id=?';
 	$sentencia_editar = $pdo->prepare($sql_editar);
-	$sentencia_editar->execute(array($enlaces,$backup_url,$iid));
+	// $sentencia_editar->execute(array($enlaces,$backup_url,$iid));
+	$sentencia_editar->execute(array($enlaces,$iid));
 
 	//cerramos conexión base de datos y sentencia
 	$pdo = null; 

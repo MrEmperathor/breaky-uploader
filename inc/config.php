@@ -5,7 +5,7 @@ $CONFIG["LocalHost"] = "localhost";
 $CONFIG["nameBase"] = "breaky";
 $CONFIG["nameBase2"] = "breaky";
 $CONFIG["dbUser"] = "root";
-$CONFIG["dbPass"] = "";
+$CONFIG["dbPass"] = "9999zzzz";
 
 // DATOS DE ACCESO PANEL WEB
 $CONFIG["EmbedUser"] = "admin";
@@ -32,10 +32,10 @@ $CONFIG["mystream"] = "nocr7vp3j9lijae6urbh7p2n3z55ixc0";
 
 
 // NETU.TV
-$CONFIG["NetuApi"] = "859caaf780b6ad03e12ccf3f7e7ca4c4";
+$CONFIG["NetuApi"] = "ac41865f86c1666e18876885d7681e47";
 // FEMBED
-$CONFIG["ClientIde"] = "310616";
-$CONFIG["ClientSecret"] = "a23b6b25edffbf2e";
+$CONFIG["ClientIde"] = "365249";
+$CONFIG["ClientSecret"] = "122706e4f37cf228";
 // ACORTADOR OUO
 $CONFIG["Acortador1"] = "25l4m9Mn";
 // ACORTADOR SHORT
@@ -52,8 +52,8 @@ $CONFIG["clicknupload"] = "658633ea4kv02wdxvip18";
 
 $CONFIG["prostream"] = "1297thvn8kpl18yygta3";
 
-$CONFIG["fembedCleinte"] = "310616";
-$CONFIG["fembedSecret"] = "a23b6b25edffbf2e";
+$CONFIG["fembedCleinte"] = "365249";
+$CONFIG["fembedSecret"] = "122706e4f37cf228";
 
 
 
