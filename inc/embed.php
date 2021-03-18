@@ -189,7 +189,28 @@ $name_sin_year = substr($name, 0, -7);
                                 <?php endforeach ?>
                             </ul>
                         </dd>
-                        <dd class="col-sm-6">Similar Api</dd>
+                        <dd class="col-sm-6">
+                        
+                            <?php
+                            $igual_wp = json_decode(buscarDuplicadoWp($u), true);
+                            if (!empty($igual_wp[0])) {
+                                for ($itt=0; $itt < count($igual_wp); $itt++) { 
+                                    // echo $igual_wp[$itt]["id"];
+                                    // echo $igual_wp[$itt]["link"];
+
+                                    echo '<a href='.$igual_wp[$itt]["link"].' target="_blank" rel="noopener noreferrer">'.$igual_wp[$itt]["link"].' | '.$igual_wp[$itt]["id"].'</a>';
+
+                                }
+                                // foreach ($igual_wp[0] as $key => $item) {
+                                //     echo $item;
+                                // }
+                            }
+                                // echo "arriaba del var_sum";
+                                // var_dump($igual_wp); 
+                            
+                            ?>
+                            
+                        </dd>
                     </dl>
                 </div>
             </div>

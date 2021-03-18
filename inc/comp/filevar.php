@@ -39,9 +39,6 @@ if ($_GET['page']) {
 
         $enlacesdes = $links;
 
-
-
-
         $dlinks = array(
                         "verystream" => $enlacesdes[0],
                         "mega" => $enlacesdes[1],
@@ -93,6 +90,19 @@ if ($_GET['page']) {
 		$enlaces["prostream.to"] = (buscarDato($links,"prostream.to")) ? $links[buscarDato($links,"prostream.to")] : "No hay enlaces";
 		$enlaces["upstream.to"] = (buscarDato($links,"upstream.to")) ? $links[buscarDato($links,"upstream.to")] : "No hay enlaces";
 		$enlaces["mystream.to"] = (buscarDato($links,"mystream.to")) ? $links[buscarDato($links,"mystream.to")] : "No hay enlaces";
+
+		function buscarDuplicadoWp($u)
+		{
+
+			$wp_host = "https://maxpeliculas.net";
+			$wp_url = $wp_host."/wp-json/bk-auto-generate-buscar-id/v2/postID/".$u."/api/4cd9cd25-fc28-4089-9977-70377dc6cd4f";
+
+			$wp_result = file_get_contents($wp_url);
+			$wp_result = json_decode($wp_result, true);
+			
+			return $wp_result;
+
+		}
 
 		// if (!empty($backup_url_up)) {
 			
