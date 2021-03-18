@@ -1,4 +1,4 @@
-function doSomething_Click() {
+function doSomething_Click(post_type, post_id) {
 
     var dominio = 'https://maxpeliculas.net';
     var fembedEmbed = document.getElementById('fembedEmbed').value;
@@ -16,8 +16,13 @@ function doSomething_Click() {
     var idio = document.getElementById('idioma').value;
     // calidad
     var calid = document.getElementById('calidad').value;
+
     //tmdb
-    var tmdb = document.getElementById('tmdb').value;
+    if (post_id) {
+        var tmdb = post_id;
+    }else{
+        var tmdb = document.getElementById('tmdb').value;
+    }
 
     /*
     create: crear post nuevos
@@ -29,7 +34,7 @@ function doSomething_Click() {
     var calidad = [32,33,33,33,33];
     var trType = [2,1,1,2,2];
     var api_key = '4cd9cd25-fc28-4089-9977-70377dc6cd4f';
-    var type = 'create';
+    var type = post_type;
     // var urll = 'http://pelis24hd.test/wp-json/bk-dcms-seo-yoast-generate-post/v2';
     // postID/88/api/'.$api_key.'/blinks/'.$enlacess.'/blang/'.$idiomas.'/bcalidad/'.$calidades.'/type/'.$type';
     if (mega1080 && mega1080 != "No hay enlaces") links.push(mega1080);
@@ -110,10 +115,11 @@ function doSomething_Click() {
         return response.json();
     })
     .then(data => {
+        console.log(data);
         data_json = JSON.parse(data);
         document.getElementById('resultadooVery').innerHTML += `${data_json.status}<br/>`;
         document.getElementById('resultadooVery').innerHTML += `${data_json.id}<br/>`;
-        document.getElementById('resultadooVery').innerHTML += `${data_json.url}<br/>`;
+        document.getElementById('resultadooVery').innerHTML += `${data_json.data}<br/>`;
         document.querySelector('#cargaEmpezada').style.display = "none";
 
     })
@@ -140,6 +146,20 @@ function doSomething_Click() {
 
 // Obtenemos el botón a partir de su id. En este caso lo llamaremos testButton
 var button = document.getElementById('createPost');
+var button_update = document.getElementById('updatePost');
 
 // Registramos el evento
-button.addEventListener('click', doSomething_Click);
+button.addEventListener('click', createPostWpApi);
+button_update.addEventListener('click', updatePostWpApi);
+
+function createPostWpApi() {
+    var post_type = "create";
+    doSomething_Click(post_type);
+}
+
+function updatePostWpApi() {
+    var post_type = "update_links";
+    var post_id = document.getElementById('post_id_wp').value; 
+    // alert(post_id);
+    doSomething_Click(post_type, post_id);
+}

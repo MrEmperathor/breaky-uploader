@@ -199,6 +199,7 @@ $name_sin_year = substr($name, 0, -7);
                                     // echo $igual_wp[$itt]["link"];
 
                                     echo '<a href='.$igual_wp[$itt]["link"].' target="_blank" rel="noopener noreferrer">'.$igual_wp[$itt]["link"].' | '.$igual_wp[$itt]["id"].'</a>';
+                                    echo '<input type="hidden" id="post_id_wp" name="post_id" value="'.$igual_wp[$itt]["id"].'">';
 
                                 }
                                 // foreach ($igual_wp[0] as $key => $item) {
@@ -479,6 +480,7 @@ $name_sin_year = substr($name, 0, -7);
                 <span id="resultadooVery"></span>
                 <img src="img/45.svg" alt="Cargando..." style="max-width: 20px; display: none;" id="cargaEmpezada">
                 <button type="button" id="createPost" class="btn purp-t text-white redon-t">Crear Post</button>
+                <button type="button" id="updatePost" class="btn purp-t text-white redon-t">Actualizar Post</button>
             </div>
         </div>
     </div>
