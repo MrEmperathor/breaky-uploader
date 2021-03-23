@@ -342,7 +342,7 @@ $name_sin_year = substr($name, 0, -7);
                                         <div class="row mb-3">
 
                                             <?php 
-                                                $opciones_name = array('720' => 'Todo 720', '1080' => 'Todo 1080', '720p' => 'Todo 720 Completo', 'hqq.to' => 'Solo netu', 'jetload' => 'Solo jetload', 'uptobox' => 'Solo uptobox', 'gounlimited' => 'Solo gounlimited', "mega" => 'Solo Mega', 'gdfree' => 'Solo GDFree', 'gdvip' => 'Solo GDVip');
+                                                $opciones_name = array('720' => 'Todo 720', '1080' => 'Todo 1080', '720p' => 'Todo 720 Completo', 'hqq.to' => 'Solo netu', 'jetload' => 'Solo jetload', 'uptobox' => 'Solo uptobox', 'gounlimited' => 'Solo gounlimited', "mega" => 'Solo Mega', 'gdfree' => 'Solo GDFree', 'gdvip' => 'Solo GDVip', 'fembed' => 'Fembed');
 
                                                 foreach ($opciones_name as $key => $value) {
                                                     // echo '<div class="col">
@@ -674,7 +674,7 @@ function accion() {
             if (document.getElementById(clave).checked) {
                 opcionUnica += ` -K ${clave}`
                 if (clave == 'hqq.to' || clave == 'jetload' || clave == 'uptobox' || clave == 'gounlimited' || clave ==
-                    'mega' || clave == 'gdfree' || clave == 'gdvip') {
+                    'mega' || clave == 'gdfree' || clave == 'gdvip' || clave == 'fembed') {
                     var id_unico = '-I <?php echo $id;?>'
                 }
             }
@@ -711,7 +711,7 @@ function accion() {
 
 
     document.getElementById('comandoText').innerHTML = de + ' ' + nombre + ' ' + idioma + ' ' + calidad + ' ' + tmdb +
-        ' ' + enlace + ' ' + sub + B_C_1080 + B_C_720 + opcionUnica + ' ' + id_unico + '-B true; de2 ' + nombre + ' ' + idioma + ' ' + calidad + ' ' + tmdb + ' ' + sub + B_C_1080 + B_C_720 + opcionUnica + ' ' + id_unico;
+        ' ' + enlace + ' ' + sub + B_C_1080 + B_C_720 + opcionUnica + ' ' + id_unico + ' -B true; de2 ' + nombre + ' ' + idioma + ' ' + calidad + ' ' + tmdb + ' ' + sub + B_C_1080 + B_C_720 + opcionUnica + ' ' + id_unico;
     // document.getElementById('comandoText').innerHTML = `de -n ${nombre} -c ${caidad} -i ${idioma} -t ${tmdb} -`
 }
 </script>

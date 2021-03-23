@@ -91,7 +91,8 @@ $(document).ready(function() {
 
 
             arrayId.push(idOriginal);
-            cadena.push(`de2 -n "${name}" -i '${idioma}' -c ${calidad_dos} -t '${tmdb}' -e '${link_backup}' -K 'gdfree' -I '${idOriginal}'; `);
+            // cadena.push(`de3 -n "${name}" -i '${idioma}' -c ${calidad_dos} -t '${tmdb}' -e '${link_backup}' -K 'gdfree' -I '${idOriginal}'; `);
+            cadena.push(`de3 -n "${name}" -i '${idioma}' -c '720' -t '${tmdb}' -e '${link_backup}' -K 720 -B true; de2 -n "${name}" -i '${idioma}' -c 720 -t '${tmdb}' -K 720; `);
             
         }
         ventanaModal(cadena, arrayId)
