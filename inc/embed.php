@@ -105,6 +105,10 @@ foreach ($resultado as $datos) {
             $similares .= '<li id="primero"><a
             href="'.$base.'embed.php?page='.$datos['id'].'">'.$datos['nombre']." || ".$datos['calidad']." || ".$datos['idioma']." || ".$datos['temp'].'</a>';
         }
+        if($idioma == $datos['idioma'] && $datos['calidad'] != $calidad){
+            $enlaces_hover_2 = $enlaces_hover;
+            $calid2 = $datos['calidad'];
+        }
     }
     
 }

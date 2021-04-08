@@ -102,7 +102,7 @@ if ($_GET['page']) {
 			$wp_host = $domi;
 			$wp_url = $wp_host."/wp-json/bk-auto-generate-buscar-id/v2/postID/".$u."/api/4cd9cd25-fc28-4089-9977-70377dc6cd4f";
 
-			$wp_result = file_get_contents($wp_url);;
+			$wp_result = file_get_contents($wp_url);
 			$wp_result = json_decode($wp_result, true);
 			
 			return $wp_result;
