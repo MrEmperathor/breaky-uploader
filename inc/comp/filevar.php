@@ -1,4 +1,6 @@
 <?php 
+// ini_set('error_reporting', E_ALL|E_STRICT);
+// ini_set('display_errors', '1');
 include 'xion/conexion.php';
 
 if ($_GET['page']) {
@@ -68,8 +70,11 @@ if ($_GET['page']) {
 		curl_close($ch);
 		$result = json_decode($response, true);
 		 // echo("<img src='". $config['images']['base_url'] . $config['images']['poster_sizes'][4] . $result['poster_path'] . "'/>");
-
 		$titleOriginal = $result['original_title'];
+
+		// echo('<pre>');
+		// var_dump($result);
+		// echo('</pre>');
 
 
 		require_once('comp/funtions.php');
@@ -91,13 +96,13 @@ if ($_GET['page']) {
 		$enlaces["upstream.to"] = (buscarDato($links,"upstream.to")) ? $links[buscarDato($links,"upstream.to")] : "No hay enlaces";
 		$enlaces["mystream.to"] = (buscarDato($links,"mystream.to")) ? $links[buscarDato($links,"mystream.to")] : "No hay enlaces";
 
-		function buscarDuplicadoWp($u)
+		function buscarDuplicadoWp($u, $domi)
 		{
 
-			$wp_host = "https://maxpeliculas.net";
+			$wp_host = $domi;
 			$wp_url = $wp_host."/wp-json/bk-auto-generate-buscar-id/v2/postID/".$u."/api/4cd9cd25-fc28-4089-9977-70377dc6cd4f";
 
-			$wp_result = file_get_contents($wp_url);
+			$wp_result = file_get_contents($wp_url);;
 			$wp_result = json_decode($wp_result, true);
 			
 			return $wp_result;

@@ -2,7 +2,7 @@ function doSomething_Click(post_type, post_id) {
 
     var dominio = 'https://maxpeliculas.net';
     var fembedEmbed = document.getElementById('fembedEmbed').value;
-    var fembed = document.getElementById('fembed').value;
+    var fembed = document.getElementById('fembedb').value;
     var mega720 = document.getElementById('mega720').value;
     // var mystream = document.getElementById('mystream').value;
     var hqq = document.getElementById('hqq').value;
@@ -16,12 +16,14 @@ function doSomething_Click(post_type, post_id) {
     var idio = document.getElementById('idioma').value;
     // calidad
     var calid = document.getElementById('calidad').value;
+    var poster = document.getElementById('poster').value;
+
 
     //tmdb
     if (post_id) {
         var tmdb = post_id;
     }else{
-        var tmdb = document.getElementById('tmdb').value;
+        var tmdb = document.getElementById('tmdbb').value;
     }
 
     /*
@@ -48,17 +50,22 @@ function doSomething_Click(post_type, post_id) {
     // if (ouo && ouo != "No hay enlaces") links.push(ouo);
 
     
+    
     if (idio == "LAT" || idio == "LATINO") {
 
         var bkIdioma = "Latino";
+        var addlinkIdioma = 29;
 
-    } else if (idio == "CASTELLANO") {
+    } else if (idio == "CASTELLANO" || idio == "ESP") {
 
         var bkIdioma = "Castellano";
+        var addlinkIdioma = 1559;
+
 
     } else if (idio == "SUB" || idio == "SUBTITULADO") {
 
         var bkIdioma = "Subtitulado";
+        var addlinkIdioma = 31;
 
     }
 
@@ -78,6 +85,8 @@ function doSomething_Click(post_type, post_id) {
     var idiomaFinal = btoa(JSON.stringify(idioma)); 
     var calidadFinal = btoa(JSON.stringify(calidad));
     var trType = btoa(JSON.stringify(trType));
+    var poster = btoa(JSON.stringify(poster));
+
 
     console.log(linksFinal);
     console.log(idiomaFinal);
@@ -89,9 +98,14 @@ function doSomething_Click(post_type, post_id) {
     var varDecode = btoa(varEncode);
     // postID/88/api/{api_key}/blinks/'.$enlacess.'/blang/'.$idiomas.'/bcalidad/'.$calidades.'/type/'.$type';
 
+    https://thingproxy.freeboard.io/fetch/http://my.api.com/get/stuff
     */
+
+    // proxy= 'https://thingproxy.freeboard.io/fetch/'
 //    const urll = `http://pelis24hd.test/wp-json/bk-dcms-seo-yoast-generate-post/v2/postID/${tmdb}/api/${api_key}/blinks/${linksFinal}/blang/${bcalidad}/bcalidad/${calidades}/type/${type}/`;
-   const urll = dominio+'/wp-json/bk-dcms-seo-yoast-generate-post/v2/postID/'+tmdb+'/api/'+api_key+'/blinks/'+linksFinal+'/blang/'+idiomaFinal+'/bcalidad/'+calidadFinal+'/type/'+type+'/tr/'+trType+'/';
+
+    const urll = dominio+'/wp-json/bk-dcms-seo-yoast-generate-post/v2/postID/'+tmdb+'/api/'+api_key+'/blinks/'+linksFinal+'/blang/'+idiomaFinal+'/bcalidad/'+calidadFinal+'/type/'+type+'/tr/'+trType+'/poster/'+poster+'/addlink/'+addlinkIdioma;
+
    console.log(urll);
 
     // var parametros = {
@@ -157,9 +171,12 @@ function createPostWpApi() {
     doSomething_Click(post_type);
 }
 
-function updatePostWpApi() {
+function updatePostWpApi(post_id, idioma) {
     var post_type = "update_links";
-    var post_id = document.getElementById('post_id_wp').value; 
+    // var post_id = document.getElementById('post_id_wp').value; 
     // alert(post_id);
-    doSomething_Click(post_type, post_id);
+    var confirmar = confirm('Actualizar enlaces?');
+    if (confirmar == true) {
+        doSomething_Click(post_type, post_id);
+    }
 }
