@@ -21,7 +21,7 @@ $CONFIG["OpenloadUser"] = "userdeopenload";
 $CONFIG["OpenloadPass"] = "passworddeopenoad";
 
 // UPTOBOX
-$CONFIG["UptoboxSses"] = "aa97a9e6899148e6414c742df2b159ce54d8p";
+$CONFIG["UptoboxSses"] = "e9020131e0318ce8da2b1478180d271b7s4s8";
 
 $CONFIG["Gounlimited"] = "5735fajqp4n1imi3p8g6";
 #JETLOAD

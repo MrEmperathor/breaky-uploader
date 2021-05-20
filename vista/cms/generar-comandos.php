@@ -271,7 +271,8 @@ function accion(){
         subb_enlace = '';
     }
     if (renomDesdeEpisodio) {
-        var de = 'se';
+        var de = 'se3';
+        var de_ = 'se4 ';
     } else {
         var de = dee ? "de2" : "de";
     }
@@ -288,7 +289,7 @@ function accion(){
     var cantTemp = cantidadEpisodioBuscar ? ` -E ${cantidadEpisodioBuscar}` : '';
 
     
-    document.getElementById('comandoText').innerHTML += de+nombre+idioma+calidad+tmdb+enla+sub+eliminar_audioo+eliminar_subb+cont+renomEpi+numTemp+cantTemp+"; ";
+    document.getElementById('comandoText').innerHTML += de+nombre+idioma+calidad+tmdb+enla+sub+eliminar_audioo+eliminar_subb+cont+renomEpi+numTemp+cantTemp+"; "+de_+nombre+idioma+calidad+tmdb+sub+eliminar_audioo+eliminar_subb+cont+renomEpi+numTemp+cantTemp+"; ";
     limpiarImputs();
     // document.getElementById('comandoText').innerHTML = `de -n ${nombre} -c ${caidad} -i ${idioma} -t ${tmdb} -`
 }

@@ -36,10 +36,13 @@ class MyAppFembed():
             self.r = requests.post(self.url_api_final).json()
             # self.r = requests.post(self.url_api_final)
             # print(self.r)
+            # print(self.r["data"])
             # print(self.r.text)
             # print(self.r.encoding)
             # print(self.r)
             for i in self.r["data"]:
+                # print(i)
+                # print()
                 if i["label"] == "720p":
                     # de3 -n "LA HISTORIA SIN FIN 2 1990" -i "LATINO" -c 720 -t 34636 '1uheHW0H6lCBi-3dArsxcgPlVaGUXZ_9m'  -K 720 -B true; de2 -n "LA HISTORIA SIN FIN 2 1990" -i "LATINO" -c 720 -t 34636  -K 720 
                     listo = i["file"]

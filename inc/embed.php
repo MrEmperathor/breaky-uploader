@@ -18,9 +18,15 @@ $base = "http://" . $host . $uri . "/";
 $urlRedirect = 'https://www.cine24h.net/redirect-to/?redirect=';
 
 if (!empty($u)) {
-    $sql_leer = "SELECT * FROM pelis WHERE TMDB LIKE '%$u%' ORDER BY TMDB";
-    $gsent = $pdo->prepare($sql_leer);
-    $gsent->execute();
+    // $sql_leer = "SELECT * FROM pelis WHERE TMDB LIKE '%$u%' ORDER BY TMDB";
+    $sql_leer = "SELECT * FROM pelis WHERE TMDB = ?";
+    
+    // $gsent = $pdo->prepare($sql_leer);
+    $gsent = $pdo->prepare($sql_leer, [
+        PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL,
+    ]);
+    $parametros = [$u];
+    $gsent->execute($parametros);
 
     $resultado = $gsent->fetchAll();
 }
@@ -36,8 +42,9 @@ $GD_VIP = str_replace('https://drive.google.com/open?id=', 'https://drive.google
 $enlaces["gounlimited.to-embed"] = str_replace('https://gounlimited.to/', 'https://gounlimited.to/embed-', $enlaces["gounlimited.to"].'.html');
 $embedUptobox = str_replace('https://uptobox.com/', 'https://uptostream.com/iframe/', $enlaces["uptobox.com"]);
 
+// http://image.tmdb.org/t/p/w185/5R70ehKGh5V0ZYOdikxwSfoLGMt.jpg
 $backdrop = (empty($result['backdrop_path'])) ? "<img src='https://image.tmdb.org/t/p/original/nRXO2SnOA75OsWhNhXstHB8ZmI3.jpg'>" : "<img src='". $config['images']['base_url'] . $config['images']['backdrop_sizes'][3] . $result['backdrop_path'] . "'/>";
-$poster_home = (empty($result['poster_path'])) ? "<img src='https://image.tmdb.org/t/p/original/nRXO2SnOA75OsWhNhXstHB8ZmI3.jpg'>" : "<img src='". $config['images']['base_url'] . $config['images']['poster_sizes'][2] . $result['poster_path'] . "'/>";
+$poster_home = (empty($result['poster_path'])) ? "<img src='https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg'>" : "<img src='". $config['images']['base_url'] . $config['images']['poster_sizes'][2] . $result['poster_path'] . "'/>";
 
 $embed_fembed = str_replace('/f/', '/v/', $enlaces["fembed.com"]);
 $embed_fembed = str_replace('//www.', '//', $embed_fembed);
@@ -140,7 +147,7 @@ if (!empty($igual_wp[0])) {
 <header class="main-header">
     <div class="background-overlay py-5 textColor">
         <div class="row backdrop">
-            <div class="col Image">
+            <div class="col Image" data-value="hola mor" id="arti">
                 <?php echo $backdrop;?>
             </div>
         </div>
@@ -304,7 +311,7 @@ if (!empty($igual_wp[0])) {
                     <hr style="border-color:#fff;">
                     <div class="row mb-3" style="font-size: 10px;">
                         <?php 
-                            $opciones_name = array('720' => 'Todo 720', '1080' => 'Todo 1080', '720p' => 'Todo 720 Completo', 'hqq.to' => 'Solo netu', 'jetload' => 'Solo jetload', 'uptobox' => 'Solo uptobox', 'gounlimited' => 'Solo gounlimited', "mega" => 'Solo Mega', 'gdfree' => 'Solo GDFree', 'gdvip' => 'Solo GDVip', 'fembed' => 'Fembed');
+                            $opciones_name = array('720' => 'Todo 720', '1080' => 'Todo 1080', '720p' => 'Todo 720 Completo', 'hqq.to' => 'Solo netu', 'jetload' => 'Solo jetload', 'uptobox' => 'Solo uptobox', 'gounlimited' => 'Solo gounlimited', "mega" => 'Solo Mega', 'gdfree' => 'Solo GDFree', 'gdvip' => 'Solo GDVip', 'fembed' => 'Fembed', 'backup' => 'Backup');
 
                             foreach ($opciones_name as $key => $value) {
                                 // echo '<div class="col">
@@ -631,7 +638,7 @@ function accion() {
             if (document.getElementById(clave).checked) {
                 opcionUnica += ` -K ${clave}`
                 if (clave == 'hqq.to' || clave == 'jetload' || clave == 'uptobox' || clave == 'gounlimited' || clave ==
-                    'mega' || clave == 'gdfree' || clave == 'gdvip' || clave == 'fembed') {
+                    'mega' || clave == 'gdfree' || clave == 'gdvip' || clave == 'fembed' || clave == 'backup') {
                     var id_unico = '-I <?php echo $id;?>'
                 }
             }

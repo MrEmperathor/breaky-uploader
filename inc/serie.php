@@ -43,6 +43,10 @@ $fembedEmbed = array();
 foreach ($varlink[11] as $key => $value) {
     $fembedEmbed[$key] = str_replace('/f/', '/v/', $value);
 }
+$fembedDownload = array();
+foreach ($varlink[11] as $key => $value) {
+    $fembedDownload[$key] = str_replace('fembed.', 'femax20.', $value);
+}
 
 ?>
 <header class="main-header">
@@ -206,9 +210,10 @@ foreach ($varlink[11] as $key => $value) {
                     <h5 class="card-title">Fembed</h5>
                     <div class="md-form mb-4 pink-textarea active-pink-textarea mt-n1">
                         <textarea id="form18" class="md-textarea form-control textColor t-area codigo11" rows="3"><?php
-                            foreach ($varlink[11] as $key => $value) {
+                            foreach ($fembedDownload as $key => $value) {
                                         // echo str_replace("\n", "\r\n\r\n", $value);
-                                        print $urlRedir . $value;
+                                        // print $urlRedir . $value;
+                                        print $value;
                                         print "\n";
                                         print "\n";
                                     }

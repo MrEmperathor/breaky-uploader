@@ -1,5 +1,6 @@
 #!/usr/bin/php
 <?php 
+$permiso = 'admin2';
 include 'conexion.php';
 
 if ($argv) {

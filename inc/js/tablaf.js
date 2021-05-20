@@ -58,7 +58,8 @@ $(document).ready(function() {
 				className: 'color-btn-tabla',
                 action: function () {
 					var datosTabla = table.rows( { selected: true } ).data();
-					if(datosTabla[0]) ResubirEnlaces(datosTabla);
+					if(datosTabla[0]) seleccionarServidores(datosTabla);
+					// if(datosTabla[0]) ResubirEnlaces(datosTabla);
                 }
             }
         ],
@@ -70,8 +71,118 @@ $(document).ready(function() {
     expresion = /_blank\"\>(.*)\</i;
     expresion2 = /da\"\>(.*)\</i;
 
+    function seleccionarServidores(datosTabla) {
+
+        document.querySelector("#select_servidores").innerHTML = '<div class="col-2"><input class="form-check-input" type="checkbox" value="hqq.to" id="netu"><label class="form-check-label" for="netu">Netu</label></div>';
+        document.querySelector("#select_servidores").innerHTML += '<div class="col-2"><input class="form-check-input" type="checkbox" value="mega" id="mega"><label class="form-check-label" for="mega">mega</label></div>';
+        document.querySelector("#select_servidores").innerHTML += '<div class="col-2"><input class="form-check-input" type="checkbox" value="fembed" id="fembed"><label class="form-check-label" for="fembed">fembed</label></div>';
+        document.querySelector("#select_servidores").innerHTML += '<div class="col-2"><input class="form-check-input" type="checkbox" value="uptobox" id="uptobox"><label class="form-check-label" for="uptobox">uptobox</label></div>';
+        document.querySelector("#select_servidores").innerHTML += '<div class="col-2"><input class="form-check-input" type="checkbox" value="backup" id="backup"><label class="form-check-label" for="backup">backup</label></div>';
+        document.querySelector("#select_servidores").innerHTML += '<div class="col-2"><input class="form-check-input" type="checkbox" value="720" id="s720"><label class="form-check-label" for="s720">720</label></div>';
+        document.querySelector("#select_servidores").innerHTML += '<div class="col-2"><input class="form-check-input" type="checkbox" value="1080" id="s1080"><label class="form-check-label" for="s1080">1080</label></div>';
+        document.querySelector("#select_servidores").innerHTML += '<div class="col-2"><input class="form-check-input" type="checkbox" value="720" id="s720p"><label class="form-check-label" for="s720p">720p</label></div>';
+        document.querySelector("#select_servidores").innerHTML += '<div class="col-2"><input class="form-check-input" type="checkbox" value="de2" id="de2"><label class="form-check-label" for="de2">de2</label></div>';
+
+        document.querySelector("#select_servidores").innerHTML += '<div class="py-4 col-12"><div class="form-group purple-border"><label for="exampleFormControlTextarea4">Enlaces Netu</label><textarea class="form-control" name="enlace" id="enlace" rows="6" placeholder="Pegar enlaces"></textarea></div></div>';
+
+
+        document.querySelector("#botonUniversal").innerHTML += `<div class="col-2"><button type="button" class="btn btn-primary" id="ser_obtener">Obtener</button></div>`; 
+
+        document.querySelector("#ser_obtener").addEventListener("click", function(){ResubirEnlaces(datosTabla)});
+
+    }
+
     // resubir enlaces indivisuales
     function ResubirEnlaces(datosTabla) {
+
+        alert(datosTabla.length);
+
+        var servidorValue = '';
+        // document.querySelectorAll("#select_servidores .col-2 input").forEach(vall => vall.checked == true ? servidorValue += vall.value == "1080" || vall.id == "s720" ? '-c '+vall.value+' ' : '-K '+vall.value+' ' : enlacesNetu = vall.value);
+        document.querySelectorAll("#select_servidores .col-2 input").forEach(function (vall) {
+            // vall.checked == true ? servidorValue += vall.value == "1080" || vall.id == "s720" ? '-c '+vall.value+' ' : '-K '+vall.value+' ' : enlacesNetu = vall.value
+
+            if (vall.checked == true) {
+
+                servidorValue += vall.value == "1080" || vall.id == "720" ? '-c '+vall.value+' ' : '-K '+vall.value+' ';
+                if(vall.value == "de2"){
+                    de2Datos = true;
+                    var re = /-K de2 /gi;
+                    servidorValue = servidorValue.replace('-K de2 ', '');
+                }else{
+                    de2Datos = false;
+                }
+            }
+        });
+
+
+        function removeItemFromArr ( arr, item ) {
+            var i = arr.indexOf( item );
+         
+            if ( i !== -1 ) {
+                arr.splice( i, 1 );
+            }
+        }
+        function buscarParametroArray(array, parametro) {
+
+            for (let i = 0; i < array.length; i++) {
+                // const element = array[i];
+                if (array[i].includes(parametro)) {
+                    var indice = array.indexOf(array[i]);
+                    indice += 1;
+                    break
+                }
+            }
+            return array[indice];
+        }
+
+        var enlacesNetu = document.querySelector("#select_servidores .col-12 textarea").value;
+
+        // console.log(enlaesNetu);
+
+        exp = /\n/g;
+        var enlacesJson = {};
+        var words = enlacesNetu.split(exp);
+        // removeItemFromArr(words, '');
+        var modulo = 0
+        var modulo2 = 0
+        words.forEach(remov => {
+            if(! remov) removeItemFromArr(words, remov)
+            
+        });
+        // words.forEach(element => {
+        //     if (modulo % 2) {
+        //         if(element.length != 0) enlacesJson[words[modulo2]] = element;   
+        //         if(element.length != 0) console.log('EL ENLACE ES---->: '+element);
+        //         modulo2 += 2;
+        //     }else{
+        //         if(element.length != 0) console.log(element) 
+                
+        //     }
+        //     modulo += 1;
+
+
+        // });
+
+        // console.log(enlacesJson);
+
+
+        // if (urlVikiUnEnlace) {
+        //     words.forEach(element => {
+        //     if(element) enlaces += ` -V '${element}'`;
+        //     });
+        // } else {
+        //     words.forEach(element => {
+        //     if(element) enlaces += ` -e '${element}'`;
+        //     });
+        // }
+
+
+
+
+        
+        
+
         var cadena = [];
         cadenaa = '';
         for (let index = 0; index < datosTabla.length; index++) {
@@ -88,11 +199,17 @@ $(document).ready(function() {
 
             if(calidad == "(1080)") var calidad_dos = "1080";
             if(calidad == "(720)") var calidad_dos = "720";
+            const idOriginall = servidorValue.includes('-K 720') ? '-c 720 ' : `-I '${idOriginal}'`
+
+            if(words[0] !== undefined) var link_backup = buscarParametroArray(words, name);
+            var de2 = de2Datos === true ? `-B true; de2 -n "${name}" ${idOriginall} -t '${tmdb}' -i '${idioma}' ${servidorValue};` : ";";
+
 
 
             arrayId.push(idOriginal);
             // cadena.push(`de3 -n "${name}" -i '${idioma}' -c ${calidad_dos} -t '${tmdb}' -e '${link_backup}' -K 'gdfree' -I '${idOriginal}'; `);
-            cadena.push(`de3 -n "${name}" -i '${idioma}' -c '720' -t '${tmdb}' -e '${link_backup}' -K 720 -B true; de2 -n "${name}" -i '${idioma}' -c 720 -t '${tmdb}' -K 720; `);
+            // cadena.push(`de3 -n "${name}" -i '${idioma}' -c '720' -t '${tmdb}' -e '${link_backup}' -K 720 -B true; de2 -n "${name}" -i '${idioma}' -c 720 -t '${tmdb}' -K 720; `);
+            cadena.push(`de3 -n "${name}" ${idOriginall} -i '${idioma}' -t '${tmdb}' -e '${link_backup}' ${servidorValue}${de2} `);
             
         }
         ventanaModal(cadena, arrayId)
@@ -261,21 +378,22 @@ $(document).ready(function() {
         ventanaModal(cadena, arrayId)
     }
 
+    
+
 	function ventanaModal(cadena, arrayId){
 
-		function btn(params, params2) {
+        function btn(params, params2) {
 			
-			if (params2) {
-				var botn = `<button type="button" class="btn btn-primary" onclick="preguntarSiNo(${params2});">${params}</button>`;
-				return botn;
-
-			}else{
-				var botn = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">${params}</button>`;
-				// var botn = `<button type="button" class="btn btn-primary" id="colorp">${params}</button>`;
-				return botn;
-
-			}
-		}
+            if (params == "Borrar Todo") {
+                var botn = `<button type="button" class="btn btn-primary" onclick="preguntarSiNo(${params2});">${params}</button>`;
+                return botn;
+                
+            }else{
+                var botn = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">${params}</button>`;
+                // var botn = `<button type="button" class="btn btn-primary" id="colorp">${params}</button>`;
+                return botn;
+            }
+        }
 
 		if (cadena) {
 
@@ -291,5 +409,7 @@ $(document).ready(function() {
 			document.getElementById('boton_modal').innerHTML = '';
 			document.getElementById('boton_modal_1').innerHTML = '';
 		}
+
+
 	}
 } );

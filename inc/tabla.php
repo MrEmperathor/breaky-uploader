@@ -85,7 +85,9 @@ $conexion=conexion();
 			}
 		</style>
 		<h2>Enlaces para Peliculas</h2>
-		<div class="row mb-1">
+		<div class="row mb-4 mt-3" id="select_servidores">
+		</div>
+		<div class="row mb-1" id="botonUniversal">
 			<div class="col-2"><div id="boton_modal"></div></div>
 			<div class="col-2"><div id="boton_modal_1"></div></div>
 		</div>
@@ -129,7 +131,7 @@ $conexion=conexion();
 					// echo('</pre>');
 
 					// $enlaces_completos = unserialize($ver[5]);
-					if($ver[2] == '(1080)') $linkParaExtra720 = extraNetu($ver[5], 'fembed.com');
+					if($ver[2] == '(1080)') $linkParaExtra720 = extraNetu($ver[5], 'mega.nz');
 					if($ver[2] == '(720)') $linkParaExtra720 = extraNetu($ver[5], 'mega.nz');
 
 					
