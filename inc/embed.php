@@ -143,6 +143,60 @@ if (!empty($igual_wp[0])) {
     $duplicados .= '</tbody>';
     $duplicados .= '</table>';
 }
+
+$codigo = 20;
+$html_links = "";
+$findme = "uptobox";
+$upt_array = array();
+$upt_array_720 = array();
+foreach ($links as $key => $value) {
+
+    $mi_host = parse_url($value, PHP_URL_HOST);
+    $posi = strpos($value, $findme);
+
+    if (strpos($value, $findme)) {
+        $upt_array[] = $value;
+    }
+    if ($value) {
+        // $value = ($key == "drive.google.com.VIP") ? $GD_VIP : $value;
+
+        // $value = ($key == "gounlimited.to") ? $embedGounliited : $value;
+        $html_links .= '<div class="col-md-4">
+                <h5 class="card-title">'.$key.' | '.$mi_host.'</h5>
+                <div class="card w-70 azul1-t redon-t ">
+                    <div class="card-body mr-3">
+                        <p class="card-text text-white" id=codigo'.$codigo.'>'.$value.'</p>
+                    </div>
+                </div>
+                <button type="button" id=bt1 class="btn purp-t text-white redon-t mt-n3" data-clipboard-target=#codigo'.$codigo.'>Copiar</button>
+            </div>';
+    }
+    $codigo++;
+}
+foreach ($links_hover as $keey => $val){
+
+    $mi_host = parse_url($val, PHP_URL_HOST);
+    $posi = strpos($val, $findme);
+
+    if (strpos($val, $findme)) {
+        $upt_array_720[] = $val;
+    }
+}
+
+if (count($upt_array_720) >= 1){
+    $mi_upt_720 = $upt_array_720[1];
+}else{
+    $mi_upt_720 = $upt_array_720[0];
+
+}
+
+if (count($upt_array) >= 1){
+    $mi_upt = $upt_array[1];
+}else{
+    $mi_upt = $upt_array[0];
+
+}
+
 ?>
 <header class="main-header">
     <div class="background-overlay py-5 textColor">
@@ -181,6 +235,7 @@ if (!empty($igual_wp[0])) {
                 <dd class="col-sm-4">
                     <button type="button" class="btn purp-t redon-t" data-toggle="modal" data-target="#mimodal">Mostrar Enlaces</button>
                     <button type="button" class="btn purp-t redon-t" data-toggle="modal" data-target="#mimodal2">Generar Coomando</button>
+                    <button type="button" class="btn purp-t redon-t" data-toggle="modal" data-target="#mimodal3">Edit TMDB</button>
                 </dd>
             </dl>
             <dl class="row">
@@ -361,7 +416,6 @@ if (!empty($igual_wp[0])) {
     </div>
 </div>
 
-
 <div class="modal fade" id="mimodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -377,61 +431,91 @@ if (!empty($igual_wp[0])) {
             
             <div class="modal-body" id=codigo0>
                 <?php 
-                    if (!empty($enlaces_hover_2)) {
-                        // echo ($enlaces_hover_2["fembed-embed"] != "") ? $enlaces_hover_2["fembed-embed"].'<br>' : ""; // uptobox embed
-                        // echo ($enlaces_hover_2["mystream.to"] != "") ? $enlaces_hover_2["mystream.to"].'<br>' : ""; //jetload
-                        echo ($enlaces_hover_2["hqq.to"] != "") ? $enlaces_hover_2["hqq.to"].'<br>' : ""; //netu
-                        echo ($enlaces_hover_2["mega.nz"] != "") ? $enlaces_hover_2["mega.nz"].'<br>' : ""; //mega
-                        // echo ($enlaces_hover_2["fembed.com"] != "No hay enlaces") ? $enlaces_hover_2["fembed.com"].'<br>' : ""; //
-                        // echo ($enlaces_hover_2["short.pe"] != "") ? $enlaces_hover_2["short.pe"].'<br>' : ""; //short
-                        // echo ($enlaces_hover_2["ouo.io"] != "") ? $enlaces_hover_2["ouo.io"].'<br>' : ""; //ouo
+                    if ($calidad == "(HD)"  || $calidad == "(CAM)") {
+                        $ar_links_t = array();
+                        echo ($enlaces["fembed.com"] != "No hay enlaces") ? $embed_fembed.'<br>' : $enlaces_hover_2["fembed-embed"]; // uptobox embed
+                        // echo ($enlaces["mystream.to"] != "No hay enlaces") ? $enlaces["mystream.to"].'<br>' : ""; //jetload
+                        echo ($enlaces["hqq.to"] != "No hay enlaces") ? $enlaces["hqq.to"].'<br>' : ""; //netu
+                        echo ($enlaces["mega.nz"] != "No hay enlaces") ? $enlaces["mega.nz"].'<br>' : ""; //mega 720 upt_array
+                        echo (!empty($mi_upt)) ? $mi_upt.'<br>' : ""; //mi uptobox 720 
+                        echo ($enlaces["fembed.com"] != "No hay enlaces") ? $enlaces["fembed.com"].'<br>' : $enlaces_hover_2["fembed.com"];
+                        $fembed_v_hd = $embed_fembed;
+                        $netu_hd = $enlaces["hqq.to"];
+                        $mega_hd = $enlaces["mega.nz"];
+                        $uptobox_hd = $mi_upt;
+                        $fembed_d_hd = $enlaces["fembed.com"];
+
+                        $ar_links_t[] = (!empty($netu_hd)) ? $netu_hd : NULL;
+                        $ar_links_t[] = (!empty($fembed_v_hd)) ? $fembed_v_hd :  NULL;
+                        $ar_links_t[] = (!empty($mega_hd)) ? $mega_hd : NULL;
+                        $ar_links_t[] = (!empty($uptobox_hd)) ? $uptobox_hd : NULL;
+                        $ar_links_t[] = (!empty($fembed_d_hd)) ? $fembed_d_hd :  NULL;
+
+                        $ar_links_type = array(1,1,2,2,2);
 
 
-                        
-                    }else{
-                        echo "";
+                        // $ar_links_t = array($fembed_v_hd, $netu_hd, $mega_hd, $uptobox_hd, $fembed_d_hd);
+
+                    } else {
+                        if (!empty($enlaces_hover_2)) {
+                            // echo ($enlaces_hover_2["fembed-embed"] != "") ? $enlaces_hover_2["fembed-embed"].'<br>' : ""; // uptobox embed
+                            // echo ($enlaces_hover_2["mystream.to"] != "") ? $enlaces_hover_2["mystream.to"].'<br>' : ""; //jetload
+                            echo ($enlaces_hover_2["hqq.to"] != "") ? $enlaces_hover_2["hqq.to"].'<br>' : ""; //netu  
+                            echo ($enlaces_hover_2["mega.nz"] != "") ? $enlaces_hover_2["mega.nz"].'<br>' : ""; //mega
+                            echo ($mi_upt_720 != "") ? $mi_upt_720.'<br>' : ""; //mega
+                            // echo ($enlaces_hover_2["fembed.com"] != "No hay enlaces") ? $enlaces_hover_2["fembed.com"].'<br>' : ""; //
+                            // echo ($enlaces_hover_2["short.pe"] != "") ? $enlaces_hover_2["short.pe"].'<br>' : ""; //short
+                            // echo ($enlaces_hover_2["ouo.io"] != "") ? $enlaces_hover_2["ouo.io"].'<br>' : ""; //ouo
+                        }else{
+                            echo "";
+                        }
+                        if ($enlaces["fembed.com"] == "No hay enlaces") {
+                            $enlaces["fembed.com"] = $enlaces_hover_2["fembed.com"];
+                            $embed_fembed = $enlaces_hover_2["fembed-embed"];
+                        }
+                        echo ($enlaces["fembed.com"] != "No hay enlaces") ? $embed_fembed.'<br>' : $enlaces_hover_2["fembed-embed"]; // uptobox embed
+                        // echo ($enlaces["mystream.to"] != "No hay enlaces") ? $enlaces["mystream.to"].'<br>' : ""; //jetload
+                        echo ($enlaces["hqq.to"] != "No hay enlaces") ? $enlaces["hqq.to"].'<br>' : ""; //netu
+                        echo ($enlaces["mega.nz"] != "No hay enlaces") ? $enlaces["mega.nz"].'<br>' : ""; //mega 720 upt_array
+                        echo (!empty($mi_upt)) ? $mi_upt.'<br>' : ""; //mi uptobox 720 
+                        echo ($enlaces["fembed.com"] != "No hay enlaces") ? $enlaces["fembed.com"].'<br>' : $enlaces_hover_2["fembed.com"]; // uptobox embed
                     }
-                    if ($enlaces["fembed.com"] == "No hay enlaces") {
-                        $enlaces["fembed.com"] = $enlaces_hover_2["fembed.com"];
-                        $embed_fembed = $enlaces_hover_2["fembed-embed"];
-                    }
-                    echo ($enlaces["fembed.com"] != "No hay enlaces") ? $embed_fembed.'<br>' : $enlaces_hover_2["fembed-embed"]; // uptobox embed
-                    // echo ($enlaces["mystream.to"] != "No hay enlaces") ? $enlaces["mystream.to"].'<br>' : ""; //jetload
-                    echo ($enlaces["hqq.to"] != "No hay enlaces") ? $enlaces["hqq.to"].'<br>' : ""; //netu
-                    echo ($enlaces["mega.nz"] != "No hay enlaces") ? $enlaces["mega.nz"].'<br>' : ""; //mega 720
-                    echo ($enlaces["fembed.com"] != "No hay enlaces") ? $enlaces["fembed.com"].'<br>' : $enlaces_hover_2["fembed.com"]; // uptobox embed
-                    // echo ($enlaces["gounlimited.to"] != "No hay enlaces") ? $urlRedirect . $enlaces["gounlimited.to"].'<br>' : ""; //gounlimited
-                    // echo ($enlaces["fembed.com"] != "No hay enlaces") ? $urlRedirect . $enlaces["fembed.com"].'<br>' : ""; //gounlimited
-                    // echo ($enlaces["short.pe"] != "No hay enlaces") ? $enlaces["short.pe"].'<br>' : ""; //short
-                    // echo ($enlaces["ouo.io"] != "No hay enlaces") ? $enlaces["ouo.io"].'<br>' : ""; //ouo
-
-                    // echo '<input type="hidden" id="fembedEmbed" name="bklinks[]" value="'.$enlaces_hover_2["fembed-embed"].'">';
-                    
-
-
-
                     ?>
             </div>
             <div class="modal-footer">
                 <div class="row">
-                    <?php
-                    echo '<input type="text" id="fembedEmbed" name="bklinks[]" value="'.$embed_fembed.'">';
-                    echo '<input type="text" id="fembedb" name="bklinks[]" value="'.$enlaces["fembed.com"].'">';
-                    echo '<input type="text" id="mega720" name="bklinks[]" value="'.$enlaces_hover_2["mega.nz"].'">';
-                    // echo '<input typtextden" id="mystream" name="bklinks[]" value="'.$enlaces["mystream.to"].'">';
-                    echo '<input type="text" id="hqq" name="bklinks[]" value="'.$enlaces["hqq.to"].'">';
-                    echo '<input type="text" id="mega1080" name="bklinks[]" value="'.$enlaces["mega.nz"].'">';
-                    // echo '<input type="hidden" id="fembedRedirect" name="bklinks[]" value="'.$enlaces["fembed.com"].'">';
-                    echo '<input type="text" id="short" name="bklinks[]" value="'.$enlaces["short.pe"].'">';
-                    echo '<input type="text" id="ouo" name="bklinks[]" value="'.$enlaces["ouo.io"].'">';
+                    <?php 
+                    if ($calidad == "(HD)" || $calidad == "(CAM)") {
+                        $bk_type = array();
+                        foreach ($ar_links_t as $key => $value) {
+                            // echo '<input type="text" id="fembedEmbed" name="bk_links['.$fembed_v_hd.', '.$netu_hd.', '.$mega_hd.', '.$uptobox_hd.', '.$fembed_d_hd.']" value="">';
+                            echo '<input type="text" title="'.$value.'" id="'.$key."lin".'" name="bk_links[]" value="'.$value.'">';
+                            if (!empty($value)) echo '<input type="hidden" id="bk_trtypeid" name="bk_trtype[]" value="'.$ar_links_type[$key].'">';
+                        }
+                        // echo '<input type="text" id="fembedEmbed" name="bk_links['.$fembed_v_hd.', '.$netu_hd.', '.$mega_hd.', '.$uptobox_hd.', '.$fembed_d_hd.']" value="">';
+                        echo '<input type="hidden" id="num_link" name="bk_calidad[33, 33, 33, 33, 33]" value="'.count($ar_links_t).'">';
+                    }else{
+                        echo '<input type="text" id="fembedEmbed" name="bklinks[]" value="'.$embed_fembed.'">';
+                        echo '<input type="text" id="fembedb" name="bklinks[]" value="'.$enlaces["fembed.com"].'">';
+                        echo '<input type="text" id="mega720" name="bklinks[]" value="'.$enlaces_hover_2["mega.nz"].'">';
+                        // echo '<input typtextden" id="mystream" name="bklinks[]" value="'.$enlaces["mystream.to"].'">';
+                        echo '<input type="text" id="hqq" name="bklinks[]" value="'.$enlaces["hqq.to"].'">';
+                        echo '<input type="text" id="mega1080" name="bklinks[]" value="'.$enlaces["mega.nz"].'">';
+                        // echo '<input type="hidden" id="fembedRedirect" name="bklinks[]" value="'.$enlaces["fembed.com"].'">';
+                        echo '<input type="text" id="short" name="bklinks[]" value="'.$enlaces["short.pe"].'">';
+                        echo '<input type="text" id="ouo" name="bklinks[]" value="'.$enlaces["ouo.io"].'">';
+                        
+                        
+                        echo '<input type="text" id="miutp" name="bklinks[]" value="'.$mi_upt.'">'; 
+                        echo '<input type="text" id="miutp720" name="bklinks[]" value="'.$mi_upt_720.'">'; 
+                    }
                     //idioma
-                    echo '<input type="text" id="idioma" name="bklinks[]" value="'.$idioma.'">';
+                    echo '<input type="text" title="'.$idioma.'" id="idioma" name="bklinks[]" value="'.$idioma.'">';
                     //calidad
-                    echo '<input type="text" id="calidad" name="bklinks[]" value="'.$calidad.'">';
+                    echo '<input type="text" title="'.$calidad.'" id="calidad" name="bklinks[]" value="'.$calidad.'">';
                     //tmdb
-                    echo '<input type="text" id="tmdbb" name="bklinks[]" value="'.$result['id'].'">';
-                    echo '<input type="text" id="poster" name="bklinks[]" value="'.$result['poster_path'].'">';
-                    
+                    echo '<input type="text" title="'.$result['id'].'" id="tmdbb" name="bklinks[]" value="'.$result['id'].'">';
+                    echo '<input type="text" title="'.$result['poster_path'].'" id="poster" name="bklinks[]" value="'.$result['poster_path'].'">';
                     ?>
                 </div>
             </div>
@@ -450,8 +534,27 @@ if (!empty($igual_wp[0])) {
     </div>
 </div>
 
+<div class="modal fade" id="mimodal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content azul-t text-white">
+            <div class="modal-body" id=codigo0>
+                <div class="col-12 text-white">
+                    <label for="nombre">EDIT TMDB</label>
+                    <input type="text" name="name" class="form-control" id="edi_tmdb" aria-describedby="emailHelp" value="insertBd2.py -t TMDB -i <?=$id?> -b 3 -d <?=$result['id']?>">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <section class="py-5 text-white text-center">
     <div class="row">
+    <!-- <span >
+    <pre class="testColor">
+    <?php var_dump($enlaces)?>
+    </pre>
+    </span> -->
         <div class="col-md-4"></div>
         <div class="col-md-4">
             <h5 class="card-title">Acortador url</h5>
@@ -479,30 +582,8 @@ if (!empty($igual_wp[0])) {
     <div class="container text-white text-center">
         <div class="row">
             <?php            
-                $codigo = 20;
-                foreach ($enlaces as $key => $value) {
-                    // echo $value."<br>";
-                    // $url = parse_url($value);
-
-                    if ($value) {
-                       
-                        $value = ($key == "drive.google.com.VIP") ? $GD_VIP : $value;
-                      
-                      
-                        // $value = ($key == "gounlimited.to") ? $embedGounliited : $value;
-                        echo '<div class="col-md-4">
-                                <h5 class="card-title">'.$key.'</h5>
-                                <div class="card w-70 azul1-t redon-t ">
-                                    <div class="card-body mr-3">
-                                        <p class="card-text text-white" id=codigo'.$codigo.'>'.$value.'</p>
-                                    </div>
-                                </div>
-                                <button type="button" id=bt1 class="btn purp-t text-white redon-t mt-n3" data-clipboard-target=#codigo'.$codigo.'>Copiar</button>
-                            </div>';
-                    }
-                    $codigo++;
-                }
-                ?>
+                echo $html_links;
+            ?>
 
         </div>
     </div>

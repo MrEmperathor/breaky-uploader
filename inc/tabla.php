@@ -131,7 +131,7 @@ $conexion=conexion();
 					// echo('</pre>');
 
 					// $enlaces_completos = unserialize($ver[5]);
-					if($ver[2] == '(1080)') $linkParaExtra720 = extraNetu($ver[5], 'mega.nz');
+					if($ver[2] == '(1080)') $linkParaExtra720 = extraNetu($ver[5], 'hqq.to');
 					if($ver[2] == '(720)') $linkParaExtra720 = extraNetu($ver[5], 'mega.nz');
 
 					

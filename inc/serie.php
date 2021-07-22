@@ -23,7 +23,8 @@ $gsent->execute();
 
 $resultado = $gsent->fetchAll();
 
-$urlRedir = "https://www.cine24h.net/redirect-to/?redirect=";
+// $urlRedir = "https://www.cine24h.net/redirect-to/?redirect=";
+$urlRedir = "";
 
 $backdrop = (empty($result['backdrop_path'])) ? "<img src='https://image.tmdb.org/t/p/original/nRXO2SnOA75OsWhNhXstHB8ZmI3.jpg'>" : "<img src='". $config['images']['base_url'] . $config['images']['backdrop_sizes'][3] . $result['backdrop_path'] . "'/>";
 
@@ -87,7 +88,7 @@ foreach ($varlink[11] as $key => $value) {
                         <?php if ($datos['id'] == $id): ?>
                             <?php echo $datos['nombre']." || ".$datos['calidad']." || ".$datos['idioma']." || ".$datos['temp'];?><br>
                         <?php else: ?>
-                                <a href="<?php echo $base.'serie/'.$datos['id']; ?>"><?php echo $datos['nombre']." || ".$datos['calidad']." || ".$datos['idioma']." || ".$datos['temp']; ?></a><br>
+                                <a href="<?php echo $base.'serie.php?s='.$datos['id']; ?>"><?php echo $datos['nombre']." || ".$datos['calidad']." || ".$datos['idioma']." || ".$datos['temp']; ?></a><br>
                         <?php endif ?>
 
                         <?php endforeach ?>

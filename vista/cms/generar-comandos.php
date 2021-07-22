@@ -48,6 +48,14 @@ $de = ($_SESSION["nombre"] == $CONFIG["EmbedUser2"]) ? true : false;
                 <input type="radio" class="custom-control-input" id="c720" name="defaultExampleRadios">
                 <label class="custom-control-label" for="c720">720</label>
             </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" id="ccam" name="defaultExampleRadios">
+                <label class="custom-control-label" for="ccam">CAM</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" id="chd" name="defaultExampleRadios">
+                <label class="custom-control-label" for="chd">HD</label>
+            </div>
         </div>
         <div class="col-6">
             <label for="tmdb">TMDB</label>
@@ -83,6 +91,10 @@ $de = ($_SESSION["nombre"] == $CONFIG["EmbedUser2"]) ? true : false;
                     <input type="checkbox" class="custom-control-input" id="eliminar_sub" name="eliminar_sub">
                     <label class="custom-control-label" for="eliminar_sub">Eliminar subtitulos</label>
                 </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="marca_agua" name="marca_agua">
+                    <label class="custom-control-label" for="marca_agua">Marca de Agua</label>
+                </div>
             </div>
         </div>
         <div class="row py-3">
@@ -110,6 +122,11 @@ $de = ($_SESSION["nombre"] == $CONFIG["EmbedUser2"]) ? true : false;
 
 
 <script type="text/javascript">
+// Se ejecuta al iniciar la pagina
+$(function() {
+    let contra = localStorage.getItem("contra");
+    if (contra) document.getElementById('contra').value = contra;
+});
 
 function accion_clear(){
     document.getElementById('comandoText').value = '';
@@ -211,6 +228,10 @@ var normalize = (function() {
  
 })();
 
+function saveValueLocalStorage(name,value) {
+
+    if (name && value) localStorage.setItem(name,value);
+}
 function accion(){
     let nombre = ` -n "${normalize(document.getElementById('nombre').value)}"`;
     // let nombre = ` -n "${document.getElementById('nombre').value.replace(/[^a-zA-Z ]/g, "")}"`;
@@ -220,11 +241,14 @@ function accion(){
     let tmdb = ` -t ${document.getElementById('tmdb').value}`;
     let c10800 = document.getElementById('c1080').checked;
     let c7200 = document.getElementById('c720').checked;
+    let ccam = document.getElementById('ccam').checked;
+    let chd = document.getElementById('chd').checked;
     let ilatino = document.getElementById('ilatino').checked;
     let icastellano = document.getElementById('icastellano').checked;
     let isub = document.getElementById('isub').checked;
     let eliminar_audio = document.getElementById('eliminar_audio').checked;
     let eliminar_sub = document.getElementById('eliminar_sub').checked;
+    let marca_agua = document.getElementById('marca_agua').checked;
     let contra = document.getElementById('contra').value;
     let renomDesdeEpisodio = document.getElementById('name-epi').value;
     let urlVikiUnEnlace = document.getElementById('name-urlviki').value;
@@ -232,6 +256,8 @@ function accion(){
     let cantidadEpisodioBuscar = document.getElementById('name-epiviki').value;
     var dee = '<?php echo $de;?>';
 
+    // GUARDAR EN LOCALSTORAGE
+    saveValueLocalStorage("contra", contra);
 
 
 
@@ -257,6 +283,8 @@ function accion(){
     
     if(c10800) var calidad = " -c 1080 -K 1080";
     if(c7200) var calidad = " -c 720 -K 720";
+    if(ccam) var calidad = " -c CAM -K CAM";
+    if(chd) var calidad = " -c HD -K HD";
     if(ilatino) var idioma = ' -i "LATINO"';
     if(icastellano) var idioma = ' -i "CASTELLANO"';
     if(isub) var idioma = ' -i "SUB"';
@@ -274,7 +302,8 @@ function accion(){
         var de = 'se3';
         var de_ = 'se4 ';
     } else {
-        var de = dee ? "de2" : "de";
+        var de = dee ? "de3" : "de";
+        var de_ = dee ? "de2" : "de";
     }
     // var de = dee ? "de2" : "de";
     // var sub1 = window.sub_extra ? window.sub_extra : '';
@@ -282,6 +311,7 @@ function accion(){
     var cont = contra ? ` -p '${contra}'` : "";
     var eliminar_audioo = eliminar_audio ? ' -L "true"' : "";
     var eliminar_subb = eliminar_sub ? ' -F "true"' : "";
+    var marca_aguaa = marca_agua ? ' -m "true"' : "";
     var enla = enlaces ? enlaces : '';
     var renomEpi = renomDesdeEpisodio ? ` -R ${renomDesdeEpisodio}` : ''; 
     // var urlViki = urlVikiUnEnlace ? `-V "${urlVikiUnEnlace}"` : '';
@@ -289,8 +319,8 @@ function accion(){
     var cantTemp = cantidadEpisodioBuscar ? ` -E ${cantidadEpisodioBuscar}` : '';
 
     
-    document.getElementById('comandoText').innerHTML += de+nombre+idioma+calidad+tmdb+enla+sub+eliminar_audioo+eliminar_subb+cont+renomEpi+numTemp+cantTemp+"; "+de_+nombre+idioma+calidad+tmdb+sub+eliminar_audioo+eliminar_subb+cont+renomEpi+numTemp+cantTemp+"; ";
-    limpiarImputs();
+    document.getElementById('comandoText').innerHTML += de+' -B true'+nombre+idioma+calidad+tmdb+enla+sub+eliminar_audioo+eliminar_subb+marca_aguaa+cont+renomEpi+numTemp+cantTemp+"; "+de_+nombre+idioma+calidad+tmdb+eliminar_audioo+eliminar_subb+marca_aguaa+cont+renomEpi+numTemp+cantTemp+"; ";
+    // limpiarImputs();
     // document.getElementById('comandoText').innerHTML = `de -n ${nombre} -c ${caidad} -i ${idioma} -t ${tmdb} -`
 }
     

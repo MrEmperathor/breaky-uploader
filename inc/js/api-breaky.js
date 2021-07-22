@@ -1,22 +1,64 @@
 function doSomething_Click(post_type, post_id) {
 
+    // var array_links = document.getElementsByName('bk_trtype[]');
+    // var array_calidad = document.getElementsByName('bk_calidad[]');
+    // alert(array_links);
+    // alert(array_calidad);
+
+    function bhd(cal) {
+        var num_link = document.getElementById('num_link').value;
+        var trTypee = document.getElementsByName('bk_trtype[]');
+
+        for (let i = 0; i < num_link; i++) {
+            calidad.push(cal)
+            trType.push(trTypee[i].defaultValue)
+            links.push(document.getElementById(i+'lin').value);
+        }
+    }
+
     var dominio = 'https://maxpeliculas.net';
-    var fembedEmbed = document.getElementById('fembedEmbed').value;
-    var fembed = document.getElementById('fembedb').value;
-    var mega720 = document.getElementById('mega720').value;
-    // var mystream = document.getElementById('mystream').value;
-    var hqq = document.getElementById('hqq').value;
-    var mega1080 = document.getElementById('mega1080').value;
-
-
-    // var fembedRedirect = document.getElementById('fembedRedirect').value;
-    // var short = document.getElementById('short').value;
-    // var ouo = document.getElementById('ouo').value;
-    //idioma
-    var idio = document.getElementById('idioma').value;
-    // calidad
     var calid = document.getElementById('calidad').value;
+    calidad = [];
+    trType = [];
+    links = [];
+    var idioma = [];
+    var api_key = '4cd9cd25-fc28-4089-9977-70377dc6cd4f';
+    var type = post_type;
+
+
+    if (calid == "(HD)"){
+        bhd(33);
+    }else if (calid == "(CAM)"){
+        bhd(34);
+    }else if (calid == "(DVD)"){
+        bhd(32070);
+    }else{
+        var calidad = [32,32,33,33,33,33,33];
+        var trType = [2,2,2,1,1,2,2];
+        var mi_uptobox = document.getElementById('miutp').value;
+        var mi_uptobox_720 = document.getElementById('miutp720').value;
+        var fembedEmbed = document.getElementById('fembedEmbed').value;
+        var fembed = document.getElementById('fembedb').value;
+        var mega720 = document.getElementById('mega720').value;
+        // var mystream = document.getElementById('mystream').value;
+        var hqq = document.getElementById('hqq').value;
+        var mega1080 = document.getElementById('mega1080').value;
+
+        if (mega1080 && mega1080 != "No hay enlaces") links.push(mega1080); 
+        if (mi_uptobox && mi_uptobox != "") links.push(mi_uptobox);
+        if (mi_uptobox_720 && mi_uptobox_720 != "") links.push(mi_uptobox_720);
+        if (hqq && hqq != "No hay enlaces") links.push(hqq);
+        if (fembedEmbed && fembedEmbed != "No hay enlaces") links.push(fembedEmbed);
+        if (fembed && fembed != "No hay enlaces") links.push(fembed);
+        if (mega720 && mega720 != "No hay enlaces") links.push(mega720);
+    }
+    
+    //idioma
+    var idio = document.getElementById('idioma').value;    
     var poster = document.getElementById('poster').value;
+
+
+
 
 
     //tmdb
@@ -25,25 +67,20 @@ function doSomething_Click(post_type, post_id) {
     }else{
         var tmdb = document.getElementById('tmdbb').value;
     }
-
     /*
     create: crear post nuevos
     update_links: actualizar post
     */
 
-    var links = [];
-    var idioma = [];
-    var calidad = [32,33,33,33,33];
-    var trType = [2,1,1,2,2];
-    var api_key = '4cd9cd25-fc28-4089-9977-70377dc6cd4f';
-    var type = post_type;
+
+    
+    // var trType = [2,2,2,1,1,2,2];
+    
     // var urll = 'http://pelis24hd.test/wp-json/bk-dcms-seo-yoast-generate-post/v2';
     // postID/88/api/'.$api_key.'/blinks/'.$enlacess.'/blang/'.$idiomas.'/bcalidad/'.$calidades.'/type/'.$type';
-    if (mega1080 && mega1080 != "No hay enlaces") links.push(mega1080);
-    if (hqq && hqq != "No hay enlaces") links.push(hqq);
-    if (fembedEmbed && fembedEmbed != "No hay enlaces") links.push(fembedEmbed);
-    if (fembed && fembed != "No hay enlaces") links.push(fembed);
-    if (mega720 && mega720 != "No hay enlaces") links.push(mega720);
+
+    
+
     // if (mystream && mystream != "No hay enlaces") links.push(mystream);
     // if (fembedRedirect && fembedRedirect != "No hay enlaces") links.push(fembedRedirect);
     // if (short && short != "No hay enlaces") links.push(short);
@@ -131,10 +168,17 @@ function doSomething_Click(post_type, post_id) {
     .then(data => {
         console.log(data);
         data_json = JSON.parse(data);
+        d = data_json.data ? data_json.data : data_json.url
         document.getElementById('resultadooVery').innerHTML += `${data_json.status}<br/>`;
         document.getElementById('resultadooVery').innerHTML += `${data_json.id}<br/>`;
         document.getElementById('resultadooVery').innerHTML += `${data_json.data}<br/>`;
         document.querySelector('#cargaEmpezada').style.display = "none";
+
+        if (post_type == 'create') {
+            alert('Post creado Exitosamente '+ d);
+        }else{
+            alert('Post Actualizado Exitosamente '+ d);
+        }
 
     })
     .catch(function(err) {
