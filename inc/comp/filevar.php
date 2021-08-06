@@ -95,6 +95,7 @@ if ($_GET['page']) {
 		$enlaces["prostream.to"] = (buscarDato($links,"prostream.to")) ? $links[buscarDato($links,"prostream.to")] : "No hay enlaces";
 		$enlaces["upstream.to"] = (buscarDato($links,"upstream.to")) ? $links[buscarDato($links,"upstream.to")] : "No hay enlaces";
 		$enlaces["mystream.to"] = (buscarDato($links,"mystream.to")) ? $links[buscarDato($links,"mystream.to")] : "No hay enlaces";
+		$enlaces["formatearwindows.net"] = (buscarDato($links,"formatearwindows.net")) ? $links[buscarDato($links,"formatearwindows.net")] : "No hay enlaces";
 
 		function buscarDuplicadoWp($u, $domi)
 		{
@@ -182,21 +183,3 @@ if ($_GET['s']) {
 
 	// $DDD = str_replace(".", " ", "$DD");
 }
-
-
-
-// }
-//  if ($_GET['search']) {
-//  	$buscar = $_GET['search']
-// 	$sql_leer = "SELECT * FROM pelis WHERE nombre LIKE '%$buscar%' ORDER BY nombre";
-// 	$gsent = $pdo->prepare($sql_leer);
-// 	$gsent->execute();
-
-// 	$resultado = $gsent->fetchAll();
-// print "\n";
-// 	foreach ($resultado as $datos) {
-// 		echo $datos['nombre']." ".$datos['calidad']." ".$datos['idioma'];
-// 		print "\n";
-// 	}
-// print "\n";
-//  }

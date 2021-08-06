@@ -28,6 +28,7 @@ function doSomething_Click(post_type, post_id) {
 
     if (calid == "(HD)"){
         bhd(33);
+        calidad_app = 33;
     }else if (calid == "(CAM)"){
         bhd(34);
     }else if (calid == "(DVD)"){
@@ -144,6 +145,7 @@ function doSomething_Click(post_type, post_id) {
     const urll = dominio+'/wp-json/bk-dcms-seo-yoast-generate-post/v2/postID/'+tmdb+'/api/'+api_key+'/blinks/'+linksFinal+'/blang/'+idiomaFinal+'/bcalidad/'+calidadFinal+'/type/'+type+'/tr/'+trType+'/poster/'+poster+'/addlink/'+addlinkIdioma;
 
    console.log(urll);
+   console.log(linksFinal);
 
     // var parametros = {
     //     "postID": tmdb,
@@ -174,11 +176,11 @@ function doSomething_Click(post_type, post_id) {
         document.getElementById('resultadooVery').innerHTML += `${data_json.data}<br/>`;
         document.querySelector('#cargaEmpezada').style.display = "none";
 
-        if (post_type == 'create') {
-            alert('Post creado Exitosamente '+ d);
-        }else{
-            alert('Post Actualizado Exitosamente '+ d);
-        }
+        // if (post_type == 'create') {
+        //     alert('Post creado Exitosamente '+ d);
+        // }else{
+        //     alert('Post Actualizado Exitosamente '+ d);
+        // }
 
     })
     .catch(function(err) {
@@ -202,17 +204,173 @@ function doSomething_Click(post_type, post_id) {
     // });
 }
 
+function doSomething_Click_App(post_type, post_id) {
+
+    function bhd(cal) {
+        var num_link = document.getElementById('num_link').value;
+        var trTypee = document.getElementsByName('bk_trtype[]');
+
+        for (let i = 0; i < num_link; i++) {
+            calidad.push(cal)
+            trType.push(trTypee[i].defaultValue)
+            links.push(document.getElementById(i+'lin').value);
+        }
+    }
+
+    var dominio = 'https://maxpeliculas.net';
+    var calid = document.getElementById('calidad').value;
+    calidad = [];
+    trType = [];
+    links = [];
+    var idioma = [];
+    var api_key = '4cd9cd25-fc28-4089-9977-70377dc6cd4f';
+    var type = post_type;
+
+
+    if (calid == "(HD)"){
+        bhd(33);
+        calidad_app = 33;
+    }else if (calid == "(CAM)"){
+        bhd(34);
+        calidad_app = 34;
+    }else if (calid == "(DVD)"){
+        bhd(32070);
+        calidad_app = 32070;
+    }else{
+        var calidad = [32,32,33,33,33,33,33];
+        var trType = [2,2,2,1,1,2,2];
+        var mi_uptobox = document.getElementById('miutp').value;
+        var mi_uptobox_720 = document.getElementById('miutp720').value;
+        var fembedEmbed = document.getElementById('fembedEmbed').value;
+        var fembed = document.getElementById('fembedb').value;
+        var mega720 = document.getElementById('mega720').value;
+        // var mystream = document.getElementById('mystream').value;
+        var hqq = document.getElementById('hqq').value;
+        var mega1080 = document.getElementById('mega1080').value;
+
+        if (mega1080 && mega1080 != "No hay enlaces") links.push(mega1080); 
+        if (mi_uptobox && mi_uptobox != "") links.push(mi_uptobox);
+        if (mi_uptobox_720 && mi_uptobox_720 != "") links.push(mi_uptobox_720);
+        if (hqq && hqq != "No hay enlaces") links.push(hqq);
+        if (fembedEmbed && fembedEmbed != "No hay enlaces") links.push(fembedEmbed);
+        if (fembed && fembed != "No hay enlaces") links.push(fembed);
+        if (mega720 && mega720 != "No hay enlaces") links.push(mega720);
+    }
+    
+    //idioma
+    var idio = document.getElementById('idioma').value;    
+    var poster = document.getElementById('poster').value;
+
+
+
+
+
+    //tmdb
+    if (post_id) {
+        var tmdb = post_id;
+    }else{
+        var tmdb = document.getElementById('tmdbb').value;
+    }
+
+    
+    
+    if (idio == "LAT" || idio == "LATINO") {
+
+        var bkIdioma = "Latino";
+        var addlinkIdioma = 29;
+
+    } else if (idio == "CASTELLANO" || idio == "ESP") {
+
+        var bkIdioma = "Castellano";
+        var addlinkIdioma = 1559;
+
+
+    } else if (idio == "SUB" || idio == "SUBTITULADO") {
+
+        var bkIdioma = "Subtitulado";
+        var addlinkIdioma = 31;
+
+    }
+
+    if (calid == "(1080)") {
+        var bkCalidad = "708";
+    }else if (calid == "(720)") {
+        var bkCalidad = "795";
+    }
+
+    for (let i = 0; i < links.length; i++) {
+        // const element = array[i];
+        idioma.push(bkIdioma);
+        // calidad.push(bkCalidad);
+    }
+
+    var linksFinal = btoa(JSON.stringify(links)); 
+    var idiomaFinal = btoa(JSON.stringify(idioma)); 
+    var calidadFinal = btoa(JSON.stringify(calidad_app));
+    var trType = btoa(JSON.stringify(trType));
+    var poster = btoa(JSON.stringify(poster));
+
+
+    // console.log(linksFinal);
+    // console.log(idiomaFinal);
+    // console.log(calidadFinal);
+    
+    // var uri = 'https://music.dix.com.co:8090/px?url=https://maxpelis.tk/rest-api/v130/createMovies?API-KEY=b61gaoi3iq2sdzrs5j2n1sbv';
+    var uri = 'https://music.dix.com.co:8090/px?url=https://maxpelis.tk/rest-api/v130/createMovies?API-KEY=b61gaoi3iq2sdzrs5j2n1sbv';
+
+    const urll = uri+'&postID='+tmdb+'&blinks='+linksFinal+'=&blang='+idiomaFinal+'=&bcalidad='+calidadFinal+'=&type=create&tr='+trType+'&addlink='+addlinkIdioma;
+
+   console.log(urll);
+//    console.log(linksFinal);
+
+    document.querySelector('#cargaEmpezada').style.display = "block";
+    fetch(urll)
+    .then(function(response) {
+        // document.getElementById('resultadooVery').innerHTML = response.text();
+        return response.json();
+    })
+    .then(data => {
+        data_json = JSON.parse(data);
+        console.log(data);
+        console.log(data_json);
+        
+        document.getElementById('resultadooVery').innerHTML += `${data_json}<br/>`;
+        // document.getElementById('resultadooVery').innerHTML += `${data_json.id}<br/>`;
+        // document.getElementById('resultadooVery').innerHTML += `${data_json.data}<br/>`;
+        document.querySelector('#cargaEmpezada').style.display = "none";
+
+
+        // if (post_type == 'create') {
+        //     alert(data);
+        // }else{
+        //     alert('Post Actualizado Exitosamente '+ d);
+        // }
+
+    })
+    .catch(function(err) {
+        document.getElementById('resultadooVery').innerHTML = err;
+        document.querySelector('#cargaEmpezada').style.display = "none";
+
+    });
+}
+
 // Obtenemos el botón a partir de su id. En este caso lo llamaremos testButton
 var button = document.getElementById('createPost');
+var button_app = document.getElementById('updatePostApp');
 var button_update = document.getElementById('updatePost');
 
 // Registramos el evento
 button.addEventListener('click', createPostWpApi);
+button_app.addEventListener('click', createPostWpApiApp);
 button_update.addEventListener('click', updatePostWpApi);
 
 function createPostWpApi() {
     var post_type = "create";
     doSomething_Click(post_type);
+}
+function createPostWpApiApp() {
+    var post_type = "create";
+    doSomething_Click_App(post_type);
 }
 
 function updatePostWpApi(post_id, idioma) {
@@ -224,3 +382,5 @@ function updatePostWpApi(post_id, idioma) {
         doSomething_Click(post_type, post_id);
     }
 }
+
+

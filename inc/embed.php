@@ -9,6 +9,17 @@ if (!isset($_SESSION['nombre'])) {
 include_once 'header.php';
 
 require_once('config.php');
+
+if (!empty($_POST["searchterm"])) {
+
+    $id_db = $id;
+    $link = $_POST["searchterm"];
+    $datoBuscar = parse_url($link, PHP_URL_HOST);
+
+    require_once 'xion/updateLink.php';
+    header("Location: embed.php?page=".$id."");
+
+}
 $de = ($_SESSION["nombre"] == $CONFIG["EmbedUser2"]) ? true : false;
 
 $host  = $_SERVER['HTTP_HOST'];
@@ -33,6 +44,7 @@ if (!empty($u)) {
 
 
 //iframe
+$iframe_premiun = $enlaces["formatearwindows.net"];
 $very = str_replace('https://verystream.com/stream/', 'https://verystream.com/e/', $enlaces["verystream.com"]);
 $verystreamE = explode('/', parse_url($enlaces["verystream.com"], PHP_URL_PATH));
 $very = str_replace($verystreamE[3], "", $very);
@@ -215,8 +227,18 @@ if (count($upt_array) >= 1){
                     <h1><?php echo $result['original_title'];?></h1>
                     <p class="card-text text-white" id=codigo1><?php echo $name." ".$calidad." ".$idioma;?></p>
                     <h2><?php echo $result['id']?></h2>
-                    <p><?php echo $result['overview']; ?></>
+                    <p><?php echo $result['overview']; ?></p>
+                    <?php
 
+                        echo ($iframe_premiun != "No hay enlaces") ? $iframe_premiun.'<br>' : "";
+                        echo ($enlaces["fembed.com"] != "No hay enlaces") ? $embed_fembed.'<br>' : $enlaces_hover_2["fembed-embed"]; // uptobox embed
+                        // echo ($enlaces["mystream.to"] != "No hay enlaces") ? $enlaces["mystream.to"].'<br>' : ""; //jetload
+                        echo ($enlaces["hqq.to"] != "No hay enlaces") ? $enlaces["hqq.to"].'<br>' : ""; //netu
+                        echo ($enlaces["mega.nz"] != "No hay enlaces") ? $enlaces["mega.nz"].'<br>' : ""; //mega 720 upt_array
+                        echo (!empty($mi_upt)) ? $mi_upt.'<br>' : ""; //mi uptobox 720 
+                        echo ($enlaces["fembed.com"] != "No hay enlaces") ? $enlaces["fembed.com"].'<br>' : $enlaces_hover_2["fembed.com"];
+                    
+                    ?>
                 </div>
             </div>
 
@@ -237,15 +259,11 @@ if (count($upt_array) >= 1){
                     <button type="button" class="btn purp-t redon-t" data-toggle="modal" data-target="#mimodal2">Generar Coomando</button>
                     <button type="button" class="btn purp-t redon-t" data-toggle="modal" data-target="#mimodal3">Edit TMDB</button>
                 </dd>
-            </dl>
-            <dl class="row">
-                <dt class="col-sm-6"></dt>
-                <dt class="col-sm-6"></dt>
-                <dd class="col-sm-6">
-                    <h6><?php echo $enlaces["hqq.to"]?></h6>
-                </dd>
-                <dd class="col-sm-6">
-                    <h6><?php echo $enlaces["fembed.com"]?></h6>
+                <dd>
+                    <span id="resultadooVery"></span>
+                    <img src="img/45.svg" alt="Cargando..." style="max-width: 20px; display: none;" id="cargaEmpezada">
+                    <button type="button" id="updatePostApp" class="btn purp-t text-white redon-t">Crear Post App</button>
+                    <button type="button" id="createPost" class="btn purp-t text-white redon-t">Crear Post Web</button>
                 </dd>
             </dl>
         </div>
@@ -433,6 +451,7 @@ if (count($upt_array) >= 1){
                 <?php 
                     if ($calidad == "(HD)"  || $calidad == "(CAM)") {
                         $ar_links_t = array();
+                        echo ($iframe_premiun != "No hay enlaces") ? $iframe_premiun.'<br>' : "";
                         echo ($enlaces["fembed.com"] != "No hay enlaces") ? $embed_fembed.'<br>' : $enlaces_hover_2["fembed-embed"]; // uptobox embed
                         // echo ($enlaces["mystream.to"] != "No hay enlaces") ? $enlaces["mystream.to"].'<br>' : ""; //jetload
                         echo ($enlaces["hqq.to"] != "No hay enlaces") ? $enlaces["hqq.to"].'<br>' : ""; //netu
@@ -444,14 +463,17 @@ if (count($upt_array) >= 1){
                         $mega_hd = $enlaces["mega.nz"];
                         $uptobox_hd = $mi_upt;
                         $fembed_d_hd = $enlaces["fembed.com"];
+                        $iframe_pre = $iframe_premiun;
 
+
+                        $ar_links_t[] = (!empty($iframe_pre)) ? $iframe_pre : NULL;
                         $ar_links_t[] = (!empty($netu_hd)) ? $netu_hd : NULL;
                         $ar_links_t[] = (!empty($fembed_v_hd)) ? $fembed_v_hd :  NULL;
                         $ar_links_t[] = (!empty($mega_hd)) ? $mega_hd : NULL;
                         $ar_links_t[] = (!empty($uptobox_hd)) ? $uptobox_hd : NULL;
                         $ar_links_t[] = (!empty($fembed_d_hd)) ? $fembed_d_hd :  NULL;
 
-                        $ar_links_type = array(1,1,2,2,2);
+                        $ar_links_type = array(1,1,1,2,2,2);
 
 
                         // $ar_links_t = array($fembed_v_hd, $netu_hd, $mega_hd, $uptobox_hd, $fembed_d_hd);
@@ -488,12 +510,11 @@ if (count($upt_array) >= 1){
                     if ($calidad == "(HD)" || $calidad == "(CAM)") {
                         $bk_type = array();
                         foreach ($ar_links_t as $key => $value) {
-                            // echo '<input type="text" id="fembedEmbed" name="bk_links['.$fembed_v_hd.', '.$netu_hd.', '.$mega_hd.', '.$uptobox_hd.', '.$fembed_d_hd.']" value="">';
                             echo '<input type="text" title="'.$value.'" id="'.$key."lin".'" name="bk_links[]" value="'.$value.'">';
                             if (!empty($value)) echo '<input type="hidden" id="bk_trtypeid" name="bk_trtype[]" value="'.$ar_links_type[$key].'">';
                         }
                         // echo '<input type="text" id="fembedEmbed" name="bk_links['.$fembed_v_hd.', '.$netu_hd.', '.$mega_hd.', '.$uptobox_hd.', '.$fembed_d_hd.']" value="">';
-                        echo '<input type="hidden" id="num_link" name="bk_calidad[33, 33, 33, 33, 33]" value="'.count($ar_links_t).'">';
+                        echo '<input type="hidden" id="num_link" name="bk_calidad[33, 33, 33, 33, 33, 33]" value="'.count($ar_links_t).'">';
                     }else{
                         echo '<input type="text" id="fembedEmbed" name="bklinks[]" value="'.$embed_fembed.'">';
                         echo '<input type="text" id="fembedb" name="bklinks[]" value="'.$enlaces["fembed.com"].'">';
@@ -528,6 +549,7 @@ if (count($upt_array) >= 1){
                 <span id="resultadooVery"></span>
                 <img src="img/45.svg" alt="Cargando..." style="max-width: 20px; display: none;" id="cargaEmpezada">
                 <button type="button" id="createPost" class="btn purp-t text-white redon-t">Crear Post</button>
+                <button type="button" id="updatePostApp" class="btn purp-t text-white redon-t">Crear Post App</button>
                 <button type="button" id="updatePost" class="btn purp-t text-white redon-t">Actualizar Post</button>
             </div>
         </div>
@@ -547,6 +569,36 @@ if (count($upt_array) >= 1){
         </div>
     </div>
 </div>
+
+<section class="py-5 text-white text-center">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <!-- <h5 class="card-title">Add Link</h5> -->
+            <div class="card w-70 azul1-t redon-t-acortador">
+                <div class="card-body mr-3">
+
+
+                <form action="embed.php?page=<?php echo $id?>" method="POST" role="form" class="form-horizontal">
+                    <div class="md-form form-group">
+                        
+                        <!-- <div class="col-sm-10"> -->
+                        <input type="text" class="form-control" id="searchterm" name="searchterm" style="color: #f8e9c8;">
+                        <label for="searchterm" class="col-sm-2 control-label" data-error="wrong" data-success="right">Agregar Link</label>
+                        <!-- </div> -->
+                    </div>
+                    <div class="md-form form-group">
+                        <!-- <div class="col-sm-offset-2 col-sm-10"> -->
+                        <button type="submit" class="btn purp-t text-white redon-t mt-n3">Add</button>
+                        <!-- </div> -->
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</section>
 
 <section class="py-5 text-white text-center">
     <div class="row">

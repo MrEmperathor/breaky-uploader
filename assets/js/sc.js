@@ -23,10 +23,10 @@ function Cargando(clase) {
 }
 function enviar(){
 
-
     var url = document.getElementById('inlineFormInput').value;
     // document.getElementById('resultado').innerHTML = link += '<d><button type="submit" class="btn btn-primary mb-2" onclick="formu();">Submit</button>';
-    const a = "http://167.86.105.129/panel/vista/cms/pedir.php?url=" + url;
+    var x = location.hostname;
+    const a = "http://"+x+"/panel/vista/cms/pedir.php?url=" + url;
 
     function traerDatos(a){
 
@@ -98,7 +98,8 @@ function traerEnlaces(pl,name,idioma,name_two) {
 
     var ple = btoa(pl);
     // var ple = encodeURI(pl);
-    const b = "http://167.86.105.129/panel/vista/cms/pedir.php?pl=" + ple;
+    var x = location.hostname;
+    const b = "http://"+x+"/panel/vista/cms/pedir.php?pl=" + ple;
     console.log('se enviara' + b);
 
     const phttp = new XMLHttpRequest();
@@ -167,7 +168,8 @@ function traerEnlaces(pl,name,idioma,name_two) {
 
 function BuscarIdTMDB(name,url,idioma) {
     
-    const uritmdb = "http://167.86.105.129/panel/vista/cms/pedir.php?id=" + name;
+    var x = location.hostname;
+    const uritmdb = "http://"+x+"/panel/vista/cms/pedir.php?id=" + name;
     const ihttp = new XMLHttpRequest();
     ihttp.open('GET', uritmdb, true);
     ihttp.send();
@@ -197,7 +199,8 @@ function BuscarPeso(urlDrive){
 
     // document.getElementById('modalPeso').innerHTML += `<div class="alert alert-primary" role="alert" style="white-space: nowrap; overflow: hidden;">url drive ${urlDrive}</div>`;
 
-    const gdPeso = "http://167.86.105.129/panel/vista/cms/pedir.php?peso=" + idGd[0];
+    var x = location.hostname;
+    const gdPeso = "http://"+x+"/panel/vista/cms/pedir.php?peso=" + idGd[0];
     const ghttp = new XMLHttpRequest();
     ghttp.open('GET', gdPeso, true);
     ghttp.send();
