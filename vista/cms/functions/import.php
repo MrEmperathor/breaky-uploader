@@ -11,7 +11,7 @@ $id_max = $data2;
 $hd     = 33;
 $cam    = 34;
 $dvd    = 32070;
-$allow_maxpeli = false;     // app
+$allow_maxpeli = false;
 $allow_max = true;
 
 
