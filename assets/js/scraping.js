@@ -78,7 +78,7 @@ function ejecutar() {
     Cargando('preloader');
     var url = document.getElementById('inlineFormInput').value;
     var x = location.hostname;
-    const a = "http://"+x+"/panel/inc/modelo/app.php?ur=" + url;
+    const a = "http://"+x+"/panel2/panel/inc/modelo/app.php?ur=" + url;
 
 
 

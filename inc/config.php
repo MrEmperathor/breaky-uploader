@@ -2,10 +2,10 @@
 
 // BASE DE DATOS
 $CONFIG["LocalHost"] = "localhost";
-$CONFIG["nameBase"] = "breaky";
-$CONFIG["nameBase2"] = "breaky";
-$CONFIG["dbUser"] = "root";
-$CONFIG["dbPass"] = "9999zzzz";
+$CONFIG["nameBase"] = "break_cms";
+$CONFIG["nameBase2"] = "break_cms";
+$CONFIG["dbUser"] = "break_maxbreak2";
+$CONFIG["dbPass"] = "maxbreak";
 
 // DATOS DE ACCESO PANEL WEB
 $CONFIG["EmbedUser"] = "admin";
