@@ -22,6 +22,8 @@ include "controlador/app.php";
                   include "vista/cms/sc.php";
                 }elseif($id === 'generar-comando'){
                   include "vista/cms/generar-comandos.php";
+                }elseif($id === 'import'){
+                  include "vista/cms/import.php";
                  }else{
                   include "vista/cms/index.php";
                  }

@@ -202,7 +202,7 @@ if (count($upt_array_720) >= 1){
 
 }
 
-if (count($upt_array) >= 1){
+if (count($upt_array) >= 2){
     $mi_upt = $upt_array[1];
 }else{
     $mi_upt = $upt_array[0];

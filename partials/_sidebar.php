@@ -64,6 +64,7 @@
           <ul class="nav flex-column sub-menu">
               <li class="nav-item"> <a class="nav-item"> <a class="nav-link" href="/panel2/panel/?id=sc">Plugin</a></li>
               <li class="nav-item"> <a class="nav-item"> <a class="nav-link" href="/panel2/panel/?id=generar-comando">Comandos</a></li>
+              <li class="nav-item"> <a class="nav-item"> <a class="nav-link" href="/panel2/panel/?id=import">Importar</a></li>
           </ul>
         </div>
       </li>

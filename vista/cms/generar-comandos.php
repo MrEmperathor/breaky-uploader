@@ -126,6 +126,10 @@ $de = ($_SESSION["nombre"] == $CONFIG["EmbedUser2"]) ? true : false;
 $(function() {
     let contra = localStorage.getItem("contra");
     if (contra) document.getElementById('contra').value = contra;
+    let tmdbb = localStorage.getItem("tmdb");
+    if (tmdbb) document.getElementById('tmdb').value = tmdbb;
+    let nombree = localStorage.getItem("nombre");
+    if (nombree) document.getElementById('nombre').value = nombree;
 });
 
 function accion_clear(){
@@ -234,6 +238,8 @@ function saveValueLocalStorage(name,value) {
 }
 function accion(){
     let nombre = ` -n "${normalize(document.getElementById('nombre').value)}"`;
+    let nombree = `${normalize(document.getElementById('nombre').value)}`;
+    let tmdbb = `${normalize(document.getElementById('tmdb').value)}`;
     // let nombre = ` -n "${document.getElementById('nombre').value.replace(/[^a-zA-Z ]/g, "")}"`;
     // let nombre = nombre.replace(/[^a-zA-Z ]/g, "")
     let enlace = document.getElementById('enlace').value;
@@ -258,6 +264,9 @@ function accion(){
 
     // GUARDAR EN LOCALSTORAGE
     saveValueLocalStorage("contra", contra);
+    saveValueLocalStorage("tmdb", tmdbb);
+    saveValueLocalStorage("nombre", nombree);
+
 
 
 
